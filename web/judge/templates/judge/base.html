@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ESOE OOP Judge</title>
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+    <nav>
+      <a href="{% url 'judge:index' %}">Home</a>
+      <a href="{% url 'judge:problem_list' %}">Problems</a>
+      <a href="{% url 'judge:profile' %}">Profile</a>
+      <a href="{% url 'judge:logout' %}">Logout</a>
+    </nav>
+    {% endif %}
+
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+    <h6>
+      Developed by 梁浩穎 (B02505012) and 李蔚成 (B02505006).<br>
+      Credits to <a href="http://ada2015.csie.org">ADA2015</a> for inspiration.
+    </h6>
+  </body>
+</html>

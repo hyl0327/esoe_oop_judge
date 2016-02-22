@@ -1,0 +1,14 @@
+{% extends 'judge/base.html' %}
+
+{% block content %}
+<h2>{{ profile.user.username }} ({{ profile.user.first_name }})</h2>
+
+<form method="post" action="{% url 'judge:profile' %}">
+  {% csrf_token %}
+
+  {{ update_bitbucket_form.as_p }}
+  {{ password_change_form.as_p }}
+
+  <input type="submit" value="Update">
+</form>
+{% endblock %}

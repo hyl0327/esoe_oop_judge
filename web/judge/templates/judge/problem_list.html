@@ -1,0 +1,18 @@
+{% extends 'judge/base.html' %}
+
+{% block content %}
+<table>
+  <tr>
+    <td>ID</td>
+    <td>Title</td>
+    <td>Deadline</td>
+  </tr>
+  {% for problem in problem_list %}
+  <tr>
+    <td>{{ problem.pk }}</td>
+    <td><a href="{% url 'judge:problem_detail' problem.pk %}">{{ problem.is_sample|yesno:'(Sample) ,' }}{{ problem.title }}</a></td>
+    <td>{{ problem.deadline_datetime }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

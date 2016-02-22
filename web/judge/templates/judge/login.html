@@ -1,0 +1,15 @@
+{% extends 'judge/base.html' %}
+
+{% block content %}
+<h1>ESOE OOP Judge</h1>
+
+<form method="post" action="{% url 'judge:login' %}">
+  {% csrf_token %}
+
+  {{ form.as_p }}
+
+  <input type="hidden" name="next" value="{{ next }}">
+
+  <input type="submit" value="Login">
+</form>
+{% endblock %}

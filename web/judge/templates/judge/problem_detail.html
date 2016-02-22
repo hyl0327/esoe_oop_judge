@@ -1,0 +1,36 @@
+{% extends 'judge/base.html' %}
+
+{% block content %}
+<h2>{{ problem.is_sample|yesno:'(Sample) ,' }}{{ problem.title }}</h2>
+
+<h3>Deadline</h3>
+<p>{{ problem.deadline_datetime }}.</p>
+
+<h3>Time Limit</h3>
+<p>{{ problem.time_limit }} second{{ problem.time_limit|pluralize }}.</p>
+
+<h3>Memory Limit</h3>
+<p>{{ problem.memory_limit }} MB{{ problem.memory_limit|pluralize }}.</p>
+
+<h3>Description</h3>
+<p>{{ problem.description|linebreaks }}</p>
+
+<h3>Input Format</h3>
+<p>{{ problem.input_format|linebreaks }}</p>
+
+<h3>Output Format</h3>
+<p>{{ problem.output_format|linebreaks }}</p>
+
+<h3>Sample Input</h3>
+<p>{{ problem.input_format|linebreaks }}</p>
+
+<h3>Sample Output</h3>
+<p>{{ problem.input_format|linebreaks }}</p>
+
+<h3>Required Files</h3>
+<ul>
+  {% for requiredfile in problem.requiredfile_set.all %}
+  <li>{{ requiredfile.filename }} ({{ requiredfile.get_via_display }})</li>
+  {% endfor %}
+</ul>
+{% endblock %}
