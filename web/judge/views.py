@@ -62,12 +62,12 @@ def profile(request):
         # saved already; otherwise, render the view with all forms again (with
         # unchanged ones replaced by unbound ones, so as to clean their errors),
         # in order for the user to know what errors have occurred
-        n_changed_forms = update_bitbucket_form.has_changed() + password_change_form.has_changed()
+        n_undone_forms = update_bitbucket_form.has_changed() + password_change_form.has_changed()
 
         if update_bitbucket_form.has_changed():
             if update_bitbucket_form.is_valid():
                 update_bitbucket_form.save()
-                n_changed_forms -= 1
+                n_undone_forms -= 1
 
                 messages.success(request,
                                 'Bitbucket settings successfully updated.')
@@ -77,14 +77,14 @@ def profile(request):
         if password_change_form.has_changed():
             if password_change_form.is_valid():
                 password_change_form.save()
-                n_changed_forms -= 1
+                n_undone_forms -= 1
 
                 messages.success(request,
                                 'Password successfully changed. Please log in again.')
         else:
             password_change_form = unbound_password_change_form
 
-        if n_changed_forms == 0:
+        if n_undone_forms == 0:
             return HttpResponseRedirect(reverse('judge:profile'))
     else:
         update_bitbucket_form = unbound_update_bitbucket_form
