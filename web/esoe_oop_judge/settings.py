@@ -113,6 +113,8 @@ USE_I18N = True
 
 USE_L10N = True
 
+# We intentionally disable timezone support in order for users to see exactly
+# same datetime information from everywhere.
 USE_TZ = False
 
 
