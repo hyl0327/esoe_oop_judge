@@ -2,17 +2,21 @@
 
 {% block content %}
 <table>
-  <tr>
-    <td>ID</td>
-    <td>Title</td>
-    <td>Deadline</td>
-  </tr>
-  {% for problem in problem_list %}
-  <tr>
-    <td>{{ problem.pk }}</td>
-    <td><a href="{% url 'judge:problem_detail' problem.pk %}">{{ problem.is_sample|yesno:'(Sample) ,' }}{{ problem.title }}</a></td>
-    <td>{{ problem.deadline_datetime }}</td>
-  </tr>
-  {% endfor %}
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Deadline</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for problem in problem_list %}
+    <tr>
+      <td>{{ problem.pk }}</td>
+      <td><a href="{% url 'judge:problem_detail' problem.pk %}">{{ problem }}</a></td>
+      <td>{{ problem.deadline_datetime }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock %}

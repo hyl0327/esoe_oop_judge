@@ -15,25 +15,27 @@
 
 <h3>My Submissions</h3>
 <table>
-  <tr>
-    <td>ID</td>
-    <td>Problem</td>
-    <td>Status</td>
-    <td>Score</td>
-    <td>Running Time</td>
-    <td>Submission Datetime</td>
-  </tr>
-  {% for submission in profile.submission_set.all %}
-  <tr>
-    <td>{{ submission.pk }}</td>
-    <td><a href="{% url 'judge:problem_detail' submission.problem.pk %}">
-        {{ submission.problem.is_sample|yesno:'(Sample) ,' }}{{ submission.problem.title }}
-    </a></td>
-    <td>{{ submission.get_status_display }}</td>
-    <td>{{ submission.score }} / {{ submission.problem.testcase_amount }}</td>
-    <td>{{ submission.running_time }} ms</td>
-    <td>{{ submission.submission_datetime }}</td>
-  </tr>
-  {% endfor %}
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Problem</th>
+      <th>Status</th>
+      <th>Score</th>
+      <th>Running Time</th>
+      <th>Submission Datetime</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for submission in profile.submission_set.all %}
+    <tr>
+      <td>{{ submission.pk }}</td>
+      <td><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem }}</a></td>
+      <td>{{ submission.get_status_display }}</td>
+      <td>{{ submission.score }} / {{ submission.problem.testcase_amount }}</td>
+      <td>{{ submission.running_time }} ms</td>
+      <td>{{ submission.submission_datetime }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock %}

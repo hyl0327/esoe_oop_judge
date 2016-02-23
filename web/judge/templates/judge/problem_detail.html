@@ -1,7 +1,7 @@
 {% extends 'judge/base.html' %}
 
 {% block content %}
-<h2>{{ problem.is_sample|yesno:'(Sample) ,' }}{{ problem.title }}</h2>
+<h2>{{ problem }}</h2>
 
 <h3>Deadline</h3>
 <p>{{ problem.deadline_datetime }}.</p>
@@ -36,21 +36,25 @@
 
 <h3>My Submissions</h3>
 <table>
-  <tr>
-    <td>ID</td>
-    <td>Status</td>
-    <td>Score</td>
-    <td>Running Time</td>
-    <td>Submission Datetime</td>
-  </tr>
-  {% for submission in submission_set.all %}
-  <tr>
-    <td>{{ submission.pk }}</td>
-    <td>{{ submission.get_status_display }}</td>
-    <td>{{ submission.score }} / {{ submission.problem.testcase_amount }}</td>
-    <td>{{ submission.running_time }} ms</td>
-    <td>{{ submission.submission_datetime }}</td>
-  </tr>
-  {% endfor %}
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Status</th>
+      <th>Score</th>
+      <th>Running Time</th>
+      <th>Submission Datetime</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for submission in submission_set.all %}
+    <tr>
+      <td>{{ submission.pk }}</td>
+      <td>{{ submission.get_status_display }}</td>
+      <td>{{ submission.score }} / {{ submission.problem.testcase_amount }}</td>
+      <td>{{ submission.running_time }} ms</td>
+      <td>{{ submission.submission_datetime }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock %}
