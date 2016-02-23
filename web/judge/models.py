@@ -25,7 +25,8 @@ class Problem(models.Model):
     testcase_amount = models.IntegerField()
 
     def __str__(self):
-        return '{:s}'.format(self.title)
+        return '{:s}{:s}'.format('(Sample) ' if self.is_sample else '',
+                                 self.title)
 
     class Meta:
         ordering = ['pk']
