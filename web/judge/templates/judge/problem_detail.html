@@ -33,4 +33,24 @@
   <li>{{ requiredfile.filename }} ({{ requiredfile.get_via_display }})</li>
   {% endfor %}
 </ul>
+
+<h3>My Submissions</h3>
+<table>
+  <tr>
+    <td>ID</td>
+    <td>Status</td>
+    <td>Score</td>
+    <td>Running Time</td>
+    <td>Submission Datetime</td>
+  </tr>
+  {% for submission in submission_set.all %}
+  <tr>
+    <td>{{ submission.pk }}</td>
+    <td>{{ submission.get_status_display }}</td>
+    <td>{{ submission.score }} / {{ submission.problem.testcase_amount }}</td>
+    <td>{{ submission.running_time }} ms</td>
+    <td>{{ submission.submission_datetime }}</td>
+  </tr>
+  {% endfor %}
+</table>
 {% endblock %}

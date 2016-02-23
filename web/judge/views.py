@@ -35,6 +35,15 @@ class ProblemListView(generic.ListView):
 class ProblemDetailView(generic.DetailView):
     model = Problem
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProblemDetailView, self).get_context_data(*args, **kwargs)
+
+        problem = self.get_object()
+        profile = self.request.user.profile
+        context['submission_set'] = problem.submission_set.filter(profile=profile)
+
+        return context
+
 def profile(request):
     user = request.user
     profile = user.profile
