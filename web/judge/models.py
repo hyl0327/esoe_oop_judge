@@ -13,7 +13,7 @@ class Problem(models.Model):
     sample_input = models.TextField()
     sample_output = models.TextField()
 
-    time_limit = models.IntegerField()    # in seconds
+    time_limit = models.IntegerField()    # in ms
     memory_limit = models.IntegerField()  # in MBs
 
     deadline_datetime = models.DateTimeField()
@@ -75,7 +75,7 @@ class Submission(models.Model):
                                        ('CE', 'Compile Error')),
                               blank=True)
     score = models.IntegerField(null=True, blank=True, db_index=True)
-    running_time = models.IntegerField(null=True, blank=True)  # in seconds
+    running_time = models.IntegerField(null=True, blank=True)  # in ms
 
     submission_datetime = models.DateTimeField()
 
