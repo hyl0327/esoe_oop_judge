@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.contrib import messages
 
+from django.db.models import Max
 from django.contrib.auth.models import User
 from .models import Problem
 
@@ -32,15 +33,33 @@ def logout(request):
 class ProblemListView(generic.ListView):
     model = Problem
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProblemListView, self).get_context_data(*args, **kwargs)
+
+        profile = self.request.user.profile
+        problem_list = self.get_queryset()
+
+        profile_hiscore_list = []
+        for problem in problem_list:
+            profile_submission_set = problem.submission_set.filter(profile=profile)
+            profile_hiscore_list.append(profile_submission_set.aggregate(Max('score'))['score__max'])
+        context['problem_profile_hiscore_list'] = zip(problem_list, profile_hiscore_list)
+
+        return context
+
 class ProblemDetailView(generic.DetailView):
     model = Problem
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProblemDetailView, self).get_context_data(*args, **kwargs)
 
-        problem = self.get_object()
         profile = self.request.user.profile
-        context['submission_set'] = problem.submission_set.filter(profile=profile)
+        problem = self.get_object()
+
+        profile_submission_set = problem.submission_set.filter(profile=profile)
+        context['profile_submission_set'] = profile_submission_set
+
+        context['profile_hiscore'] = profile_submission_set.aggregate(Max('score'))['score__max']
 
         return context
 
@@ -67,8 +86,8 @@ def profile(request):
         password_change_form = PasswordChangeForm(data=request.POST, user=user)
 
         # for it to be regarded as successful (such that the user gets
-        # redirected back to judge:profile), all changed forms must be valid and
-        # saved already; otherwise, render the view with all forms again (with
+        # redirected back to profile), all changed forms must be valid and saved
+        # already; otherwise, render the view with all forms again (with
         # unchanged ones replaced by unbound ones, so as to clean their errors),
         # in order for the user to know what errors have occurred
         n_undone_forms = update_bitbucket_form.has_changed() + password_change_form.has_changed()

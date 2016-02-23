@@ -6,14 +6,16 @@
     <tr>
       <th>ID</th>
       <th>Title</th>
+      <th>Hi-Score</th>
       <th>Deadline</th>
     </tr>
   </thead>
   <tbody>
-    {% for problem in problem_list %}
+    {% for problem, profile_hiscore in problem_profile_hiscore_list %}
     <tr>
       <td>{{ problem.pk }}</td>
       <td><a href="{% url 'judge:problem_detail' problem.pk %}">{{ problem }}</a></td>
+      <td>{{ profile_hiscore }} / {{ problem.testcase_amount }}</td>
       <td>{{ problem.deadline_datetime }}</td>
     </tr>
     {% endfor %}

@@ -35,6 +35,7 @@
 </ul>
 
 <h3>My Submissions</h3>
+<p>Hi-Score: {{ profile_hiscore }} / {{ problem.testcase_amount }}</p>
 <table>
   <thead>
     <tr>
@@ -46,7 +47,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for submission in submission_set.all %}
+    {% for submission in profile_submission_set.all %}
     <tr>
       <td>{{ submission.pk }}</td>
       <td>{{ submission.get_status_display }}</td>

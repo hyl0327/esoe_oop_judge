@@ -75,7 +75,7 @@ class Submission(models.Model):
                                        ('RE', 'Runtime Error'),
                                        ('CE', 'Compile Error')),
                               blank=True)
-    score = models.IntegerField(null=True, blank=True)
+    score = models.IntegerField(null=True, blank=True, db_index=True)
     running_time = models.IntegerField(null=True, blank=True)  # in ms
 
     submission_datetime = models.DateTimeField()
