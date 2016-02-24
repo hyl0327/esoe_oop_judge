@@ -1,7 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404
-from django.views import generic
 from django.contrib import messages
 
 from django.db.models import Max
@@ -30,38 +29,32 @@ def logout(request):
     else:
         return auth_views.logout(request, next_page='judge:index')
 
-class ProblemListView(generic.ListView):
-    model = Problem
+def problem_list(request):
+    profile = request.user.profile
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(ProblemListView, self).get_context_data(*args, **kwargs)
-
-        profile = self.request.user.profile
-        problem_list = self.get_queryset()
-
-        profile_hiscore_list = []
-        for problem in problem_list:
-            profile_submission_set = problem.submission_set.filter(profile=profile)
-            profile_hiscore_list.append(profile_submission_set.aggregate(Max('score'))['score__max'])
-        context['problem_profile_hiscore_list'] = zip(problem_list, profile_hiscore_list)
-
-        return context
-
-class ProblemDetailView(generic.DetailView):
-    model = Problem
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(ProblemDetailView, self).get_context_data(*args, **kwargs)
-
-        profile = self.request.user.profile
-        problem = self.get_object()
-
+    problem_list = Problem.objects.all()
+    profile_hiscore_list = []
+    for problem in problem_list:
         profile_submission_set = problem.submission_set.filter(profile=profile)
-        context['profile_submission_set'] = profile_submission_set
+        profile_hiscore_list.append(profile_submission_set.aggregate(Max('score'))['score__max'])
+    problem_profile_hiscore_list = zip(problem_list, profile_hiscore_list)
 
-        context['profile_hiscore'] = profile_submission_set.aggregate(Max('score'))['score__max']
+    return render(request,
+                  'judge/problem_list.html',
+                  {'problem_profile_hiscore_list': problem_profile_hiscore_list})
 
-        return context
+def problem_detail(request, pk):
+    profile = request.user.profile
+
+    problem = get_object_or_404(Problem, pk=pk)
+    profile_submission_set = problem.submission_set.filter(profile=profile)
+    profile_hiscore = profile_submission_set.aggregate(Max('score'))['score__max']
+
+    return render(request,
+                  'judge/problem_detail.html',
+                  {'problem': problem,
+                   'profile_submission_set': profile_submission_set,
+                   'profile_hiscore': profile_hiscore})
 
 def profile(request):
     user = request.user

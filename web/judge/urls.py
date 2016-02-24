@@ -18,11 +18,11 @@ urlpatterns = [
         name='logout'),
 
     url(r'^problems/$',
-        login_required(views.ProblemListView.as_view()),
+        login_required(views.problem_list),
         name='problem_list'),
 
     url(r'^problems/(?P<pk>\d+)/$',
-        login_required(views.ProblemDetailView.as_view()),
+        login_required(views.problem_detail),
         name='problem_detail'),
 
     url(r'^profile/$',
