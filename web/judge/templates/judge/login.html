@@ -1,12 +1,21 @@
 {% extends 'judge/base.html' %}
 
+{% load widget_tweaks %}
+
 {% block content %}
 <h1>ESOE OOP Judge</h1>
 
 <form method="post" action="{% url 'judge:login' %}">
   {% csrf_token %}
 
-  {{ form.as_p }}
+  {{ form.non_field_errors }}
+  {% for field in form %}
+  {{ field.errors }}
+  <p>
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+  </p>
+  {% endfor %}
 
   <input type="hidden" name="next" value="{{ next }}">
 
