@@ -1,0 +1,49 @@
+#content_div{
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+
+#submissions_table{
+	border-radius: 10px;
+	width: 100%;
+	border-spacing: 0px;
+	border: 2px solid #D3D3D3;
+	font-family: "Open Sans";
+}
+
+#submissions_table thead{
+	background: #D3D3D3;
+}
+
+td, th{
+	padding: 5px;
+	text-align: center;
+}
+
+tbody > tr:nth-child(even){
+	background: #EDEDED;
+}
+
+tr > td > a{
+	text-decoration: none;
+}
+
+.submissions_id{
+	width: 10%;
+}
+.submissions_problem{
+	width: 27%;
+}
+.submissions_status{
+	width: 20%;
+}
+.submissions_score{
+	width: 7%;
+}
+.submissions_runningtime{
+	width: 15%;
+}
+.submissions_datetime{
+	width: 20%;
+}

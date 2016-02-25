@@ -1,0 +1,11 @@
+#index_div{
+	border-style: outset;
+	border-radius: 10px;
+	width: 80%; 
+	margin: 0 auto;
+	margin-top: 100px;
+}
+
+#index_div h2{
+	padding-left: 20px;
+}

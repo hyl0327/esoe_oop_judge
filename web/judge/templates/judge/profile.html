@@ -1,58 +1,67 @@
 {% extends 'judge/base.html' %}
 
 {% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'judge/css/profile.css' %}" />
+{% endblock %}
 
 {% block content %}
-<h2>{{ profile.user.username }} ({{ profile.user.first_name }})</h2>
+<div id="content_div">
+  <h2>{{ profile.user.username }} ({{ profile.user.first_name }})</h2>
 
-<h3>Bitbucket Settings & Change Password</h3>
-<form method="post" action="{% url 'judge:profile' %}">
-  {% csrf_token %}
+  <h3>Bitbucket Settings & Change Password</h3>
+  <form method="post" action="{% url 'judge:profile' %}">
+    {% csrf_token %}
 
-  {{ update_bitbucket_form.non_field_errors }}
-  {% for field in update_bitbucket_form %}
-  {{ field.errors }}
-  <p>
-    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-    {{ field }}
-  </p>
-  {% endfor %}
-
-  {{ password_change_form.non_field_errors }}
-  {% for field in password_change_form %}
-  {{ field.errors }}
-  <p>
-    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-    {{ field }}
-  </p>
-  {% endfor %}
-
-  <input type="submit" value="Update">
-</form>
-
-<h3>My Submissions</h3>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Problem</th>
-      <th>Status</th>
-      <th>Score</th>
-      <th>Running Time</th>
-      <th>Submission Datetime</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for submission in profile.submission_set.all %}
-    <tr>
-      <td>{{ submission.pk }}</td>
-      <td><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem }}</a></td>
-      <td>{{ submission.get_status_display }}</td>
-      <td>{{ submission.score }} / {{ submission.problem.testcase_amount }}</td>
-      <td>{{ submission.running_time }} ms</td>
-      <td>{{ submission.submission_datetime }}</td>
-    </tr>
+    {{ update_bitbucket_form.non_field_errors }}
+    {% for field in update_bitbucket_form %}
+    {{ field.errors }}
+    <p>
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+    </p>
     {% endfor %}
-  </tbody>
-</table>
+
+    {{ password_change_form.non_field_errors }}
+    {% for field in password_change_form %}
+    {{ field.errors }}
+    <p>
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+    </p>
+    {% endfor %}
+
+    <input type="submit" value="Update">
+  </form>
+
+  <div id="submissions_div">
+    <h3>My Submissions</h3>
+    <table id="submissions_table">
+      <thead>
+        <tr>
+          <th class="submissions_id">ID</th>
+          <th class="submissions_problem">Problem</th>
+          <th class="submissions_status">Status</th>
+          <th class="submissions_score">Score</th>
+          <th class="submissions_runningtime">Running Time</th>
+          <th class="submissions_datetime">Submission Datetime</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for submission in profile.submission_set.all %}
+        <tr>
+          <td>{{ submission.pk }}</td>
+          <td><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem }}</a></td >
+          <td>{{ submission.get_status_display }}</td>
+          <td>{{ submission.score }} / {{ submission.problem.testcase_amount }}</td>
+          <td>{{ submission.running_time }} ms</td>
+          <td>{{ submission.submission_datetime }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}

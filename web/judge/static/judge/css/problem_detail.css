@@ -1,0 +1,38 @@
+h1{
+	text-align: center;
+}
+
+#detail_div, #submissions_div{
+	width: 80%;
+	margin: 0 auto;
+}
+
+.problem_div{
+	margin-top: 20px;
+}
+
+.sample_io{
+	border: 1px solid #C0C0C0;
+	background: #FAF0E6;
+	border-radius: 5px;
+	padding-left: 10px;
+}
+
+#submissions_div table{
+	width: 100%;
+	border-collapse: collapse;
+	border: 2px solid #FAF0E6;
+	font-family: "Open Sans";
+}
+
+#submission_div table thead{
+	background: #FAF0E6;
+}
+
+td, th{
+	padding: 5px;
+}
+
+td > a{
+	text-decoration: none;
+}

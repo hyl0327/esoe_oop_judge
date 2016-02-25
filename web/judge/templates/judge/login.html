@@ -1,6 +1,11 @@
 {% extends 'judge/base.html' %}
 
 {% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% endblock %}
 
 {% block content %}
 <h1>ESOE OOP Judge</h1>

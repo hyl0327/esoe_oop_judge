@@ -1,0 +1,47 @@
+
+/* header element align */
+.floatleft{
+	float: left;
+}
+.floatright{
+	float: right;
+}
+
+body{
+	font: caption;
+}
+
+#header{
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background-color: #483D8B;
+	line-height: 30px;
+}
+
+#header ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#header ul li {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+
+#header ul li a {
+  	text-decoration: none;
+  	display: inline-block;
+  	padding: 15px 25px;
+  	font-family: 'sans-serif', sans-serif;
+  	font-size: 20px;
+  	color: #ffffff;
+}
+
+footer{
+	text-align: center;
+}

@@ -1,61 +1,93 @@
 {% extends 'judge/base.html' %}
 
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'judge/css/problem_detail.css' %}" />
+{% endblock %}
+
 {% block content %}
-<h2>{{ problem }}</h2>
+<div id="detail_div">
 
-<h3>Deadline</h3>
-<p>{{ problem.deadline_datetime }}.</p>
+  <h2>{{ problem }}</h2>
 
-<h3>Time Limit</h3>
-<p>{{ problem.time_limit }} ms.</p>
+  <div class="problem_div">
+    <h3>Deadline</h3>
+    <p>{{ problem.deadline_datetime }}.</p>
+  </div>
 
-<h3>Memory Limit</h3>
-<p>{{ problem.memory_limit }} MB{{ problem.memory_limit|pluralize }}.</p>
+  <h3>Time Limit</h3>
+  <p>{{ problem.time_limit }} ms.</p>
 
-<h3>Description</h3>
-<p>{{ problem.description|linebreaks }}</p>
+  <div class="problem_div">
+    <h3>Memory Limit</h3>
+    <p>{{ problem.memory_limit }} MB{{ problem.memory_limit|pluralize }}.</p>
+  </div>
 
-<h3>Input Format</h3>
-<p>{{ problem.input_format|linebreaks }}</p>
+  <div class="problem_div">
+    <h3>Description</h3>
+    <p>{{ problem.description|linebreaks }}</p>
+  </div>
 
-<h3>Output Format</h3>
-<p>{{ problem.output_format|linebreaks }}</p>
+  <div class="problem_div">
+    <h3>Input Format</h3>
+    <p>{{ problem.input_format|linebreaks }}</p>
+  </div>
 
-<h3>Sample Input</h3>
-<p>{{ problem.input_format|linebreaks }}</p>
+  <div class="problem_div">
+    <h3>Output Format</h3>
+    <p>{{ problem.output_format|linebreaks }}</p>
+  </div>
 
-<h3>Sample Output</h3>
-<p>{{ problem.input_format|linebreaks }}</p>
+  <div class="problem_div">
+    <h3>Sample Input</h3>
+    <div class="sample_io">
+      <p>{{ problem.input_format|linebreaks }}</p>
+    </div>
+  </div>
 
-<h3>Required Files</h3>
-<ul>
-  {% for requiredfile in problem.requiredfile_set.all %}
-  <li>{{ requiredfile.filename }} ({{ requiredfile.get_via_display }})</li>
-  {% endfor %}
-</ul>
+  <div class="problem_div">
+    <h3>Sample Output</h3>
+    <div class="sample_io">
+      <p>{{ problem.input_format|linebreaks }}</p>
+    </div>
+  </div>
 
-<h3>My Submissions</h3>
-<p>Hi-Score: {{ profile_hiscore }} / {{ problem.testcase_amount }}</p>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Status</th>
-      <th>Score</th>
-      <th>Running Time</th>
-      <th>Submission Datetime</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for submission in profile_submission_list %}
-    <tr>
-      <td>{{ submission.pk }}</td>
-      <td>{{ submission.get_status_display }}</td>
-      <td>{{ submission.score }} / {{ submission.problem.testcase_amount }}</td>
-      <td>{{ submission.running_time }} ms</td>
-      <td>{{ submission.submission_datetime }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <div class="problem_div">
+    <h3>Required Files</h3>
+    <ul>
+      {% for requiredfile in problem.requiredfile_set.all %}
+      <li>{{ requiredfile.filename }} ({{ requiredfile.get_via_display }})</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div id="submissions_div">
+  <h3>My Submissions</h3>
+  <p>Hi-Score: {{ profile_hiscore }} / {{ problem.testcase_amount }}</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Status</th>
+        <th>Score</th>
+        <th>Running Time</th>
+        <th>Submission Datetime</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for submission in profile_submission_list %}
+      <tr>
+        <td>{{ submission.pk }}</td>
+        <td>{{ submission.get_status_display }}</td>
+        <td>{{ submission.score }} / {{ submission.problem.testcase_amount }}</td>
+        <td>{{ submission.running_time }} ms</td>
+        <td>{{ submission.submission_datetime }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

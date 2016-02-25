@@ -1,9 +1,16 @@
 {% extends 'judge/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel='stylesheet' href="{% static 'judge/css/index.css' %}" />
+{% endblock %}
 
 {% block content %}
-<h2>How to submit?</h2>
-<p>TODO</p>
+<div id="index_div">
+  <h2>How to submit?</h2>
+  <p>TODO</p>
 
-<h2>How are submissions judged?</h2>
-<p>TODO</p>
+  <h2>How are submissions judged?</h2>
+  <p>TODO</p>
+</div>
 {% endblock %}
