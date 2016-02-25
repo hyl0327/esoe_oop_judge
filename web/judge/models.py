@@ -66,7 +66,8 @@ class Submission(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     status = models.CharField(max_length=2,
-                              choices=(('SE', 'Submission Error'),
+                              choices=(('SU', 'Submitting'),
+                                       ('SE', 'Submission Error'),
                                        ('JU', 'Judging'),
                                        ('AC', 'Accepted'),
                                        ('PA', 'Partially Accepted'),
@@ -74,9 +75,9 @@ class Submission(models.Model):
                                        ('ML', 'Memory Limit Exceeded'),
                                        ('RE', 'Runtime Error'),
                                        ('CE', 'Compile Error')),
-                              blank=True)
-    score = models.IntegerField(null=True, blank=True, db_index=True)
-    running_time = models.IntegerField(null=True, blank=True)  # in ms
+                              default='SU')
+    score = models.IntegerField(default=0, db_index=True)
+    running_time = models.IntegerField(default=0)  # in ms
 
     submission_datetime = models.DateTimeField()
 
