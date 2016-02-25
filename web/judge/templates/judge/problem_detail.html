@@ -47,7 +47,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for submission in profile_submission_set.all %}
+    {% for submission in profile_submission_list %}
     <tr>
       <td>{{ submission.pk }}</td>
       <td>{{ submission.get_status_display }}</td>

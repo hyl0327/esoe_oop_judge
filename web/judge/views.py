@@ -35,8 +35,8 @@ def problem_list(request):
     problem_list = Problem.objects.all()
     profile_hiscore_list = []
     for problem in problem_list:
-        profile_submission_set = problem.submission_set.filter(profile=profile)
-        profile_hiscore_list.append(profile_submission_set.aggregate(Max('score'))['score__max'])
+        profile_submission_list = problem.submission_set.filter(profile=profile)
+        profile_hiscore_list.append(profile_submission_list.aggregate(Max('score'))['score__max'])
     problem_profile_hiscore_list = zip(problem_list, profile_hiscore_list)
 
     return render(request,
@@ -47,13 +47,13 @@ def problem_detail(request, pk):
     profile = request.user.profile
 
     problem = get_object_or_404(Problem, pk=pk)
-    profile_submission_set = problem.submission_set.filter(profile=profile)
-    profile_hiscore = profile_submission_set.aggregate(Max('score'))['score__max']
+    profile_submission_list = problem.submission_set.filter(profile=profile)
+    profile_hiscore = profile_submission_list.aggregate(Max('score'))['score__max']
 
     return render(request,
                   'judge/problem_detail.html',
                   {'problem': problem,
-                   'profile_submission_set': profile_submission_set,
+                   'profile_submission_list': profile_submission_list,
                    'profile_hiscore': profile_hiscore})
 
 def profile(request):
