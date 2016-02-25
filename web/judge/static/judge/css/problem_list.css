@@ -1,50 +1,50 @@
-#problem_list_div{
-	width: 80%;
-	margin: 0 auto;
-	margin-top: 100px;
+#problem_list_div {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 100px;
 }
 
-#problem_list_div table{
-	border-radius: 10px;
-	width: 100%;
-	border-spacing: 0px;
-	border: 2px solid #D3D3D3;
-	font-size: 20px;
+#problem_list_div table {
+    border-radius: 10px;
+    width: 100%;
+    border-spacing: 0px;
+    border: 2px solid #D3D3D3;
+    font-size: 20px;
 }
 
-#problem_list_div table thead{
-	background: #D3D3D3;
+#problem_list_div table thead {
+    background: #D3D3D3;
 }
 
-td, th{
-	padding: 10px;
+td, th {
+    padding: 10px;
 }
 
-td > a{
-	text-decoration: none;
+td > a {
+    text-decoration: none;
 }
 
-tbody > tr:nth-child(even){
-	background: #F5F5F5;
+tbody > tr:nth-child(even) {
+    background: #F5F5F5;
 }
 
-tbody > tr:hover{
-	background: #B0C4DE;
+tbody > tr:hover {
+    background: #B0C4DE;
 }
 
-.problem_id{
-	width: 8%;
-	text-align: center;
+.problem_id {
+    width: 8%;
+    text-align: center;
 }
-.problem_title{
-	width:43%;
-	text-align: left;
+.problem_title {
+    width:43%;
+    text-align: left;
 }
-.problem_hiscore{
-	width: 20%;
-	padding-right: 30px;
-	text-align: center;
+.problem_hiscore {
+    width: 20%;
+    padding-right: 30px;
+    text-align: center;
 }
-.problem_deadline_datetime{
-	width: 25%;
+.problem_deadline_datetime {
+    width: 25%;
 }

@@ -3,12 +3,11 @@
 {% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'judge/css/problem_detail.css' %}" />
+<link rel="stylesheet" href="{% static 'judge/css/problem_detail.css' %}">
 {% endblock %}
 
 {% block content %}
 <div id="detail_div">
-
   <h2>{{ problem }}</h2>
 
   <div class="problem_div">
@@ -16,8 +15,10 @@
     <p>{{ problem.deadline_datetime }}.</p>
   </div>
 
-  <h3>Time Limit</h3>
-  <p>{{ problem.time_limit }} ms.</p>
+  <div class="problem_div">
+    <h3>Time Limit</h3>
+    <p>{{ problem.time_limit }} ms.</p>
+  </div>
 
   <div class="problem_div">
     <h3>Memory Limit</h3>
@@ -66,7 +67,7 @@
 <div id="submissions_div">
   <h3>My Submissions</h3>
   <p>Hi-Score: {{ profile_hiscore }} / {{ problem.testcase_amount }}</p>
-  
+
   <table>
     <thead>
       <tr>
