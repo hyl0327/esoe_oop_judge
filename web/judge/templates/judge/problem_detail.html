@@ -82,8 +82,16 @@
       <tr>
         <td>{{ submission.pk }}</td>
         <td>{{ submission.get_status_display }}</td>
-        <td>{{ submission.score }} / {{ submission.problem.testcase_amount }}</td>
-        <td>{{ submission.running_time }} ms</td>
+        <td>
+          {% if submission.score %}
+          {{ submission.score }} / {{ submission.problem.testcase_amount }}
+          {% endif %}
+        </td>
+        <td>
+          {% if submission.running_time %}
+          {{ submission.running_time }} ms
+          {% endif %}
+        </td>
         <td>{{ submission.submission_datetime }}</td>
       </tr>
       {% endfor %}
