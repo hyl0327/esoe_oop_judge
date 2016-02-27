@@ -22,7 +22,6 @@ class Problem(models.Model):
     judged_by = models.CharField(max_length=1,
                                  choices=(('F', 'File'),
                                           ('E', 'Executable')))
-    testcase_amount = models.IntegerField()
 
     def __str__(self):
         return '{:s}{:s}'.format('(Sample) ' if self.is_sample else '',
@@ -69,14 +68,18 @@ class Submission(models.Model):
                               choices=(('SU', 'Submitting'),
                                        ('SE', 'Submission Error'),
                                        ('JU', 'Judging'),
+                                       ('CE', 'Compile Error'),
                                        ('AC', 'Accepted'),
                                        ('PA', 'Partially Accepted'),
                                        ('TL', 'Time Limit Exceeded'),
                                        ('ML', 'Memory Limit Exceeded'),
-                                       ('RE', 'Runtime Error'),
-                                       ('CE', 'Compile Error')),
+                                       ('RE', 'Runtime Error')),
                               default='SU')
-    score = models.IntegerField(null=True, blank=True, db_index=True)
+    score = models.DecimalField(max_digits=5,
+                                decimal_places=2,
+                                null=True,
+                                blank=True,
+                                db_index=True)
     running_time = models.IntegerField(null=True, blank=True)  # in ms
 
     submission_datetime = models.DateTimeField()

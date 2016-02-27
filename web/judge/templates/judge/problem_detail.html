@@ -66,7 +66,7 @@
 
 <div id="submissions_div">
   <h3>My Submissions</h3>
-  <p>Hi-Score: {{ profile_hiscore }} / {{ problem.testcase_amount }}</p>
+  <p>Hi-Score: {{ profile_hiscore }}</p>
   <table>
     <thead>
       <tr>
@@ -84,7 +84,7 @@
         <td>{{ submission.get_status_display }}</td>
         <td>
           {% if submission.score %}
-          {{ submission.score }} / {{ submission.problem.testcase_amount }}
+          {{ submission.score }}
           {% endif %}
         </td>
         <td>
