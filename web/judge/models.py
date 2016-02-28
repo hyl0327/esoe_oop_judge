@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import validate_slug
 
 from django.contrib.auth.models import User
 
@@ -50,8 +51,12 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     # Bitbucket settings
-    bitbucket_account = models.CharField(max_length=32, blank=True)
-    bitbucket_repository = models.CharField(max_length=32, blank=True)
+    bitbucket_account = models.CharField(max_length=32,
+                                         blank=True,
+                                         validators=[validate_slug])
+    bitbucket_repository = models.CharField(max_length=32,
+                                            blank=True,
+                                            validators=[validate_slug])
 
     def __str__(self):
         return '#{:d} (User={:s})'.format(self.pk,
