@@ -1,7 +1,50 @@
 #content_div {
     width: 80%;
     margin: 0 auto;
-    margin-top: 100px;
+}
+
+/* Profile's bitbucket settings & change passwoard */
+#bitbucket_div, #password_div {
+    display: table;
+    width: 100%;
+    height: auto;
+    table-layout: fixed;
+    margin-bottom: 15px;
+}
+
+.sub_bitbucket_div, .sub_password_div  {
+    display: table-cell;
+    padding-right: 10px;
+}
+
+.bitbucket_field, .password_field {
+    width: 100%;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 3px;
+}
+
+.errorlist {
+    font-size: 20px;
+    list-style: none;
+    width: 75%;
+    padding: 15px 0px;
+    text-align: center;
+    color: #B22222;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+#update_btn {
+    width: auto;
+    font-size: 25px;
+    padding: 5px 5px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+h3 {
+    margin-top: 25px;
 }
 
 #submissions_table {

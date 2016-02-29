@@ -13,8 +13,8 @@
   </head>
   <body>
     {% if user.is_authenticated %}
-    <div id="header">
-      <nav>
+    <div id="header_div">
+      <nav id="header_nav">
         <ul>
           <div class="floatleft">
             <li><a href="{% url 'judge:index' %}">Home</a></li>
@@ -37,9 +37,11 @@
     </ul>
     {% endif %}
 
+    <div id="base_content_div">
     {% block content %}
     {% endblock %}
-
+    </div>
+    
     <footer>
       <h6>
         Developed by 梁浩穎 (B02505012) and 李蔚成 (B02505006).<br>

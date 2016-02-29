@@ -10,35 +10,40 @@ body {
     font: caption;
 }
 
-#header {
+#header_div {
     position: fixed;
     width: 100%;
-    left: 0;
     top: 0;
+    z-index: 9999;
     background-color: #483D8B;
-    line-height: 30px;
+    line-height: 20px;
 }
 
-#header ul {
+#header_div ul {
     list-style: none;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
-#header ul li {
+#header_div ul li {
     display: inline-block;
     padding: 0;
     margin: 0;
 }
 
-#header ul li a {
+#header_div ul li a {
     text-decoration: none;
     display: inline-block;
-    padding: 15px 25px;
+    padding: 15px 20px;
     font-family: 'sans-serif', sans-serif;
-    font-size: 20px;
+    font-size: 17px;
     color: #ffffff;
+}
+
+#base_content_div {
+    width:auto;
+    margin-top: 100px;
 }
 
 footer {

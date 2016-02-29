@@ -15,25 +15,31 @@
   <form method="post" action="{% url 'judge:profile' %}">
     {% csrf_token %}
 
-    {{ update_bitbucket_form.non_field_errors }}
-    {% for field in update_bitbucket_form %}
-    {{ field.errors }}
-    <p>
-      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-      {{ field }}
-    </p>
-    {% endfor %}
+    <div id="bitbucket_div">
+      {# default class : "errorlist nonfield" #}
+      {{ update_bitbucket_form.non_field_errors }}
+      {% for field in update_bitbucket_form %}
+      <div class="sub_bitbucket_div">
+        {# default class: "errorlist" #}
+        {{ field.errors }}
+        <label for="{{ field.id_for_label }}" class="bitbucket_label">{{ field.label }}</label>
+        {{ field|add_class:"bitbucket_field" }}
+      </div>
+      {% endfor %}
+    </div>
 
-    {{ password_change_form.non_field_errors }}
-    {% for field in password_change_form %}
-    {{ field.errors }}
-    <p>
-      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-      {{ field }}
-    </p>
-    {% endfor %}
+    <div id="password_div">
+      {{ password_change_form.non_field_errors }}
+      {% for field in password_change_form %}
+      <div class="sub_password_div"> 
+        {{ field.errors }}
+        <label for="{{ field.id_for_label }}" class="password_label">{{ field.label }}</label>
+        {{ field|add_class:"password_field" }}
+      </div>
+      {% endfor %}
+    </div>
 
-    <input type="submit" value="Update">
+    <input type="submit" value="Update" id="update_btn">
   </form>
 
   <div id="submissions_div">

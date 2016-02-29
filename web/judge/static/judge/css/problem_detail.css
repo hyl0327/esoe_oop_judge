@@ -1,4 +1,4 @@
-h1 {
+h2 {
     text-align: center;
 }
 
@@ -13,7 +13,7 @@ h1 {
 
 .sample_io {
     border: 1px solid #C0C0C0;
-    background: #FAF0E6;
+    background: #E4E4E4;
     border-radius: 5px;
     padding-left: 10px;
 }
@@ -21,18 +21,35 @@ h1 {
 #submissions_div table {
     width: 100%;
     border-collapse: collapse;
-    border: 2px solid #FAF0E6;
+    border: 1px solid #D3D3D3;
     font-family: "Open Sans";
 }
 
-#submission_div table thead {
-    background: #FAF0E6;
+#submissions_div table thead {
+    background: #D3D3D3;
 }
 
 td, th {
     padding: 5px;
+    text-align: center;
 }
 
 td > a {
     text-decoration: none;
+}
+
+.submissions_id {
+    width: 5%;
+}
+.submissions_status {
+    width: 25%;
+}
+.submissions_score {
+    width: 20%;
+}
+.submissions_runningtime {
+    width: 20%;
+}
+.submissions_datetime {
+    width: 30%;
 }

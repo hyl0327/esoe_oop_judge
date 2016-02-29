@@ -8,22 +8,28 @@
 {% endblock %}
 
 {% block content %}
+<div id="content_div">
 <h1>ESOE OOP Judge</h1>
 
-<form method="post" action="{% url 'judge:login' %}">
-  {% csrf_token %}
+  <form method="post" action="{% url 'judge:login' %}">
+    {% csrf_token %} 
+    <p>{{ form.non_field_errors }}</p>
+    
+    <div id="login_div">
+      {% for field in form %}
+      <div id="sub_login_div">
+      {{ field.errors }}
+        <p>
+          <label for="{{ field.id_for_label }}" class="login_label">{{ field.label }}</label>
+          {{ field|add_class:"login_field" }}
+        </p>
+      </div>
+      {% endfor %}
 
-  {{ form.non_field_errors }}
-  {% for field in form %}
-  {{ field.errors }}
-  <p>
-    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-    {{ field }}
-  </p>
-  {% endfor %}
+      <input type="hidden" name="next" value="{{ next }}">
 
-  <input type="hidden" name="next" value="{{ next }}">
-
-  <input type="submit" value="Login">
-</form>
+      <input type="submit" value="Login" id="submit_btn">
+    </div>
+  </form>
+</div>
 {% endblock %}
