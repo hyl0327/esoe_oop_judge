@@ -31,7 +31,7 @@
     <div id="password_div">
       {{ password_change_form.non_field_errors }}
       {% for field in password_change_form %}
-      <div class="sub_password_div"> 
+      <div class="sub_password_div">
         {{ field.errors }}
         <label for="{{ field.id_for_label }}" class="password_label">{{ field.label }}</label>
         {{ field|add_class:"password_field" }}
