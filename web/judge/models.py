@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import validate_slug
 
 from django.contrib.auth.models import User
 
@@ -22,7 +23,6 @@ class Problem(models.Model):
     judged_by = models.CharField(max_length=1,
                                  choices=(('F', 'File'),
                                           ('E', 'Executable')))
-    testcase_amount = models.IntegerField()
 
     def __str__(self):
         return '{:s}{:s}'.format('(Sample) ' if self.is_sample else '',
@@ -51,8 +51,12 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     # Bitbucket settings
-    bitbucket_account = models.CharField(max_length=32, blank=True)
-    bitbucket_repository = models.CharField(max_length=32, blank=True)
+    bitbucket_account = models.CharField(max_length=32,
+                                         blank=True,
+                                         validators=[validate_slug])
+    bitbucket_repository = models.CharField(max_length=32,
+                                            blank=True,
+                                            validators=[validate_slug])
 
     def __str__(self):
         return '#{:d} (User={:s})'.format(self.pk,
@@ -66,16 +70,21 @@ class Submission(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     status = models.CharField(max_length=2,
-                              choices=(('SE', 'Submission Error'),
+                              choices=(('SU', 'Submitting'),
+                                       ('SE', 'Submission Error'),
                                        ('JU', 'Judging'),
+                                       ('CE', 'Compile Error'),
                                        ('AC', 'Accepted'),
                                        ('PA', 'Partially Accepted'),
                                        ('TL', 'Time Limit Exceeded'),
                                        ('ML', 'Memory Limit Exceeded'),
-                                       ('RE', 'Runtime Error'),
-                                       ('CE', 'Compile Error')),
-                              blank=True)
-    score = models.IntegerField(null=True, blank=True, db_index=True)
+                                       ('RE', 'Runtime Error')),
+                              default='SU')
+    score = models.DecimalField(max_digits=5,
+                                decimal_places=2,
+                                null=True,
+                                blank=True,
+                                db_index=True)
     running_time = models.IntegerField(null=True, blank=True)  # in ms
 
     submission_datetime = models.DateTimeField()
