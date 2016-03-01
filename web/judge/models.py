@@ -19,11 +19,6 @@ class Problem(models.Model):
 
     deadline_datetime = models.DateTimeField()
 
-    # should it be judged by an answer file (as traditionally) or an executable?
-    judged_by = models.CharField(max_length=1,
-                                 choices=(('F', 'File'),
-                                          ('E', 'Executable')))
-
     def __str__(self):
         return '{:s}{:s}'.format('(Sample) ' if self.is_sample else '',
                                  self.title)
@@ -72,8 +67,9 @@ class Submission(models.Model):
     status = models.CharField(max_length=2,
                               choices=(('SU', 'Submitting'),
                                        ('SE', 'Submission Error'),
+                                       ('CO', 'Compiling'),
+                                       ('CE', 'Compilation Error'),
                                        ('JU', 'Judging'),
-                                       ('CE', 'Compile Error'),
                                        ('AC', 'Accepted'),
                                        ('PA', 'Partially Accepted'),
                                        ('TL', 'Time Limit Exceeded'),
@@ -88,6 +84,8 @@ class Submission(models.Model):
     running_time = models.IntegerField(null=True, blank=True)  # in ms
 
     submission_datetime = models.DateTimeField()
+
+    detail_message = models.TextField(blank=True)
 
     def __str__(self):
         return '#{:d} (Problem={:s}, Profile={:s})'.format(self.pk,

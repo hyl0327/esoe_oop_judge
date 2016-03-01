@@ -1,11 +1,16 @@
+import os
+import subprocess
+
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
+from django.utils import timezone
+from django.conf import settings
 
 from django.db.models import Max
 from django.contrib.auth.models import User
-from .models import Problem
+from .models import Problem, Submission
 
 from django.contrib.auth import views as auth_views
 
@@ -47,6 +52,29 @@ def problem_detail(request, pk):
     profile = request.user.profile
 
     problem = get_object_or_404(Problem, pk=pk)
+
+    # handle submission
+    if request.method == 'POST':
+        now = timezone.now()
+
+        # no submissions are allowed after deadline
+        if now > problem.deadline_datetime:
+            messages.error(request, 'Sorry, it is already over the deadline.')
+        else:
+            submission = Submission(problem=problem,
+                                    profile=profile,
+                                    submission_datetime=now)
+            submission.save()
+
+            # judge
+            subprocess.Popen([os.path.join(settings.JUDGE_BIN_DIR, 'judge.py'),
+                              str(submission.pk)],
+                             cwd=settings.JUDGE_BIN_DIR)
+
+            messages.success(request, 'Submitting.')
+
+        return HttpResponseRedirect(reverse('judge:problem_detail', kwargs={'pk': pk}))
+
     profile_submission_list = problem.submission_set.filter(profile=profile)
     profile_hiscore = profile_submission_list.aggregate(Max('score'))['score__max']
 
