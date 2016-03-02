@@ -16,6 +16,30 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+# Root of the project
+ROOT_DIR = os.path.dirname(BASE_DIR)
+
+
+# Judge related settings
+JUDGE_DIR = os.path.join(ROOT_DIR, 'judge')
+
+JUDGE_BIN_DIR = os.path.join(JUDGE_DIR, 'bin')
+JUDGE_POLICIES_DIR = os.path.join(JUDGE_DIR, 'policies')
+JUDGE_PROBLEMS_DIR = os.path.join(JUDGE_DIR, 'problems')
+JUDGE_SUBMISSIONS_DIR = os.path.join(JUDGE_DIR, 'submissions')
+
+JUDGE_EMAIL = 'esoe.oop.judge@gmail.com'
+JUDGE_EMAIL_PASSWORD = 'qfTurFvx6u1ZV997H6gZ'
+
+JUDGE_BITBUCKET_EMAIL = 'esoe.oop.judge@gmail.com'
+JUDGE_BITBUCKET_ACCOUNT = 'esoe_oop_judge'
+JUDGE_BITBUCKET_PASSWORD = 'qfTurFvx6u1ZV997H6gZ'
+
+JUDGE_SUBMISSION_MAX_FILESIZE = 1048576  # in bytes (default: 1 MB)
+JUDGE_SUBMISSION_TIMEOUT = 5             # for each submitted file; in seconds
+JUDGE_COMPILATION_TIMEOUT = 10           # for all submitted files together; in seconds
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
