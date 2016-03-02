@@ -1,4 +1,8 @@
 /* header element align */
+*{
+    margin: 0;
+}
+
 .floatleft {
     float: left;
 }
@@ -6,7 +10,8 @@
     float: right;
 }
 
-body {
+html, body {
+    height: 80%;
     font: caption;
 }
 
@@ -42,10 +47,15 @@ body {
 }
 
 #base_content_div {
-    width:auto;
+    min-height: 100%;
+    height: auto !important;
+    margin: 0 auto -4em;
     margin-top: 100px;
 }
 
-footer {
+#footer, #push{
+    clear: both;
+    height: 4em;
     text-align: center;
+    margin-top: 30px;
 }

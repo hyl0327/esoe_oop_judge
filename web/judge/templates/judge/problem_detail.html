@@ -64,6 +64,12 @@
   </div>
 </div>
 
+<form method="post" action="{% url 'judge:problem_detail' problem.pk %}">
+  {% csrf_token %}
+
+  <input type="submit" value="Submit">
+</form>
+
 <div id="submissions_div">
   <h3>My Submissions</h3>
   <p>Hi-Score: {{ profile_hiscore }}</p>
