@@ -6,10 +6,14 @@
     <meta charset="utf-8">
     <title>ESOE OOP Judge</title>
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'judge/css/base.css' %}">
     {% block css %}
     {% endblock %}
+
+    <script type="text/javascript" src="{% static 'judge/js/base.js' %}"></script>
+    {% block js %}
+    {% endblock %}
+    
   </head>
   <body>
     {% if user.is_authenticated %}
@@ -29,15 +33,20 @@
     </div>
     {% endif %}
 
-    {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-
     <div id="base_content_div">
+
+    {# TODO: message div #}
+      {% if messages %}
+      <div id="messages_div">
+        <button id="close" onClick="close_message()">x</button>
+        <ul class="messages" id="messages_ul" >
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
       {% block content %}
       {% endblock %}
     </div>

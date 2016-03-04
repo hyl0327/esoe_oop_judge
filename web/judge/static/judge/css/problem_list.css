@@ -43,8 +43,13 @@
     border-bottom: 1px solid #D3D3D3;
 }
 
-td, th {
+tr > th {
     padding: 10px;
+}
+
+tr > td {
+    padding: 10px;
+    font-family: sans-serif, "Open Sans";
 }
 
 td > a {

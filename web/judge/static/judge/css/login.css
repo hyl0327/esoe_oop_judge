@@ -2,6 +2,8 @@ h1 {
     text-align: center;
     margin-top: -10px;
     margin-bottom: 20px;
+    color: #483D8B;
+    font-weight: bold;
 }
 
 
@@ -38,10 +40,17 @@ h1 {
 
 #submit_btn {
     width: auto;
-    font-size: 25px;
-    padding: 5px 5px;
+    font-size: 20px;
+    padding: 10px 15px;
     border-radius: 5px;
     text-transform: uppercase;
+    background: #6A5ACD;
+    color: #FFFFFF;
     position: relative;
     left: 35%;
+    border: inherit;
+}
+
+#submit_btn:hover {
+    cursor: pointer;
 }
