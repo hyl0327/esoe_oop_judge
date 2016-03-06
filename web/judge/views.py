@@ -1,12 +1,15 @@
 import os
+import sys
 import subprocess
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+import config
 
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.utils import timezone
-from django.conf import settings
 
 from django.db.models import Max
 from django.contrib.auth.models import User
@@ -38,15 +41,16 @@ def problem_list(request):
     profile = request.user.profile
 
     problem_list = Problem.objects.all()
-    profile_hiscore_list = []
+    profile_solved_list = []
     for problem in problem_list:
         profile_submission_list = problem.submission_set.filter(profile=profile)
-        profile_hiscore_list.append(profile_submission_list.aggregate(Max('score'))['score__max'])
-    problem_profile_hiscore_list = zip(problem_list, profile_hiscore_list)
+        profile_solved = profile_submission_list.filter(status='AC').exists()
+        profile_solved_list.append(profile_solved)
+    problem_profile_solved_list = zip(problem_list, profile_solved_list)
 
     return render(request,
                   'judge/problem_list.html',
-                  {'problem_profile_hiscore_list': problem_profile_hiscore_list})
+                  {'problem_profile_solved_list': problem_profile_solved_list})
 
 def problem_detail(request, pk):
     profile = request.user.profile
@@ -66,23 +70,23 @@ def problem_detail(request, pk):
                                     submission_datetime=now)
             submission.save()
 
-            # judge
-            subprocess.Popen([os.path.join(settings.JUDGE_BIN_DIR, 'judge.py'),
+            # judge (without waiting)
+            subprocess.Popen([os.path.join(config.JUDGE_BIN_DIR, 'judge.py'),
                               str(submission.pk)],
-                             cwd=settings.JUDGE_BIN_DIR)
+                             cwd=config.JUDGE_BIN_DIR)
 
             messages.success(request, 'Submitting.')
 
         return HttpResponseRedirect(reverse('judge:problem_detail', kwargs={'pk': pk}))
 
     profile_submission_list = problem.submission_set.filter(profile=profile)
-    profile_hiscore = profile_submission_list.aggregate(Max('score'))['score__max']
+    profile_solved = profile_submission_list.filter(status='AC').exists()
 
     return render(request,
                   'judge/problem_detail.html',
                   {'problem': problem,
                    'profile_submission_list': profile_submission_list,
-                   'profile_hiscore': profile_hiscore})
+                   'profile_solved': profile_solved})
 
 def profile(request):
     user = request.user

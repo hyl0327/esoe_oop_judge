@@ -81,12 +81,6 @@ tr > td > a {
 .submissions_status {
     width: 20%;
 }
-.submissions_score {
-    width: 7%;
-}
-.submissions_runningtime {
-    width: 15%;
-}
 .submissions_datetime {
     width: 20%;
 }

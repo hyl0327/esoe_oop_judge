@@ -8,7 +8,7 @@
 
 {% block content %}
 <div id="detail_div">
-  <h2>{{ problem }}</h2>
+  <h2>{{ profile_solved|yesno:'[Solved] ,' }}{{ problem }}</h2>
 
   <div class="problem_div">
     <h3>Deadline</h3>
@@ -22,7 +22,7 @@
 
   <div class="problem_div">
     <h3>Memory Limit</h3>
-    <p>{{ problem.memory_limit }} MB{{ problem.memory_limit|pluralize }}.</p>
+    <p>{{ problem.memory_limit }} KB{{ problem.memory_limit|pluralize }}.</p>
   </div>
 
   <div class="problem_div">
@@ -72,14 +72,11 @@
 
 <div id="submissions_div">
   <h3>My Submissions</h3>
-  <p>Hi-Score: {{ profile_hiscore }}</p>
   <table>
     <thead>
       <tr>
         <th class="submissions_id">ID</th>
         <th class="submissions_status">Status</th>
-        <th class="submissions_score">Score</th>
-        <th class="submissions_runningtime">Running Time</th>
         <th class="submissions_datetime">Submission Datetime</th>
       </tr>
     </thead>
@@ -88,16 +85,6 @@
       <tr>
         <td>{{ submission.pk }}</td>
         <td>{{ submission.get_status_display }}</td>
-        <td>
-          {% if submission.score %}
-          {{ submission.score }}
-          {% endif %}
-        </td>
-        <td>
-          {% if submission.running_time %}
-          {{ submission.running_time }} ms
-          {% endif %}
-        </td>
         <td>{{ submission.submission_datetime }}</td>
       </tr>
       {% endfor %}

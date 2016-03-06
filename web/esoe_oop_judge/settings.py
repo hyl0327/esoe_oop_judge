@@ -11,33 +11,15 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import sys
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+import config
+
+
+# Web base directory
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Root of the project
-ROOT_DIR = os.path.dirname(BASE_DIR)
-
-
-# Judge related settings
-JUDGE_DIR = os.path.join(ROOT_DIR, 'judge')
-
-JUDGE_BIN_DIR = os.path.join(JUDGE_DIR, 'bin')
-JUDGE_POLICIES_DIR = os.path.join(JUDGE_DIR, 'policies')
-JUDGE_PROBLEMS_DIR = os.path.join(JUDGE_DIR, 'problems')
-JUDGE_SUBMISSIONS_DIR = os.path.join(JUDGE_DIR, 'submissions')
-
-JUDGE_EMAIL = 'esoe.oop.judge@gmail.com'
-JUDGE_EMAIL_PASSWORD = 'qfTurFvx6u1ZV997H6gZ'
-
-JUDGE_BITBUCKET_EMAIL = 'esoe.oop.judge@gmail.com'
-JUDGE_BITBUCKET_ACCOUNT = 'esoe_oop_judge'
-JUDGE_BITBUCKET_PASSWORD = 'qfTurFvx6u1ZV997H6gZ'
-
-JUDGE_SUBMISSION_MAX_FILESIZE = 1048576  # in bytes (default: 1 MB)
-JUDGE_SUBMISSION_TIMEOUT = 5             # for each submitted file; in seconds
-JUDGE_COMPILATION_TIMEOUT = 10           # for all submitted files together; in seconds
 
 
 # Quick-start development settings - unsuitable for production
@@ -134,19 +116,24 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Taipei'
 
-USE_I18N = True
+# we in intentionally disable internationalization/localization related
+# settings in order for users to see consistent pages from everywhere
+USE_I18N = False
+USE_L10N = False
 
-USE_L10N = True
-
-# we intentionally disable timezone support in order for users to see exactly
-# same datetime information from everywhere
+# we intentionally disable timezone support in order for users to see consistent
+# datetime information from everywhere
 USE_TZ = False
+
+# YYYY-MM-DD HH:MM:SS
+DATETIME_FORMAT='Y-m-d, H:i:s'
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [config.JUDGE_PROBLEMS_STATIC_DIR]
 
 
 # User authentication

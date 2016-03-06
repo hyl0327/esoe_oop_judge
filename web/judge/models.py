@@ -15,13 +15,13 @@ class Problem(models.Model):
     sample_output = models.TextField()
 
     time_limit = models.IntegerField()    # in ms
-    memory_limit = models.IntegerField()  # in MBs
+    memory_limit = models.IntegerField()  # in KBs
 
     deadline_datetime = models.DateTimeField()
 
     def __str__(self):
-        return '{:s}{:s}'.format('(Sample) ' if self.is_sample else '',
-                                 self.title)
+        return '{}{}'.format('(Sample) ' if self.is_sample else '',
+                             self.title)
 
     class Meta:
         ordering = ['pk']
@@ -29,15 +29,14 @@ class Problem(models.Model):
 class RequiredFile(models.Model):
     problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
 
-    # where should the file come from?
+    filename = models.CharField(max_length=32)
     via = models.CharField(max_length=1,
                            choices=(('S', 'Submitted'),
                                     ('P', 'Provided')))
-    filename = models.CharField(max_length=32)
 
     def __str__(self):
-        return '{:s} (Problem={:s})'.format(self.filename,
-                                            str(self.problem))
+        return '{} (Problem={})'.format(self.filename,
+                                        str(self.problem))
 
     class Meta:
         ordering = ['problem__pk', 'via', 'filename']
@@ -54,8 +53,8 @@ class Profile(models.Model):
                                             validators=[validate_slug])
 
     def __str__(self):
-        return '#{:d} (User={:s})'.format(self.pk,
-                                          str(self.user))
+        return '#{} (User={})'.format(self.pk,
+                                      str(self.user))
 
     class Meta:
         ordering = ['user__username']
@@ -71,26 +70,20 @@ class Submission(models.Model):
                                        ('CE', 'Compilation Error'),
                                        ('JU', 'Judging'),
                                        ('AC', 'Accepted'),
-                                       ('PA', 'Partially Accepted'),
+                                       ('NA', 'Not Accepted'),
                                        ('TL', 'Time Limit Exceeded'),
                                        ('ML', 'Memory Limit Exceeded'),
                                        ('RE', 'Runtime Error')),
-                              default='SU')
-    score = models.DecimalField(max_digits=5,
-                                decimal_places=2,
-                                null=True,
-                                blank=True,
-                                db_index=True)
-    running_time = models.IntegerField(null=True, blank=True)  # in ms
-
+                              default='SU',
+                              db_index=True)
     submission_datetime = models.DateTimeField()
 
     detail_message = models.TextField(blank=True)
 
     def __str__(self):
-        return '#{:d} (Problem={:s}, Profile={:s})'.format(self.pk,
-                                                           str(self.problem),
-                                                           str(self.profile))
+        return '#{} (Problem={}, Profile={})'.format(self.pk,
+                                                     str(self.problem),
+                                                     str(self.profile))
 
     class Meta:
         ordering = ['-pk']

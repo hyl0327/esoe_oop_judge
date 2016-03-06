@@ -13,16 +13,16 @@
       <tr>
         <th class="problem_id">ID</th>
         <th class="problem_title">Title</th>
-        <th class="problem_hiscore">Hi-Score</th>
-        <th class="problem_deadline">Deadline</th>
+        <th class="problem_solved">Solved</th>
+        <th class="problem_deadline_datetime">Deadline</th>
       </tr>
     </thead>
     <tbody>
-      {% for problem, profile_hiscore in problem_profile_hiscore_list %}
+      {% for problem, profile_solved in problem_profile_solved_list %}
       <tr>
         <td class="problem_id">{{ problem.pk }}</td>
         <td class="problem_title"><a href="{% url 'judge:problem_detail' problem.pk %}">{{ problem }}</a></td>
-        <td class="problem_hiscore">{{ profile_hiscore }}</td>
+        <td class="problem_solved">{{ profile_solved|yesno:'Yes,No' }}</td>
         <td class="problem_deadline_datetime">{{ problem.deadline_datetime }}</td>
       </tr>
       {% endfor %}

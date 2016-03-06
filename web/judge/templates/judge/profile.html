@@ -50,8 +50,6 @@
           <th class="submissions_id">ID</th>
           <th class="submissions_problem">Problem</th>
           <th class="submissions_status">Status</th>
-          <th class="submissions_score">Score</th>
-          <th class="submissions_runningtime">Running Time</th>
           <th class="submissions_datetime">Submission Datetime</th>
         </tr>
       </thead>
@@ -61,16 +59,6 @@
           <td>{{ submission.pk }}</td>
           <td><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem }}</a></td >
           <td>{{ submission.get_status_display }}</td>
-          <td>
-            {% if submission.score %}
-            {{ submission.score }}
-            {% endif %}
-          </td>
-          <td>
-            {% if submission.running_time %}
-            {{ submission.running_time }} ms
-            {% endif %}
-          </td>
           <td>{{ submission.submission_datetime }}</td>
         </tr>
         {% endfor %}

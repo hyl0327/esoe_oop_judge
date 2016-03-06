@@ -2,149 +2,245 @@
 
 import os
 import sys
+import shlex
+import shutil
 import subprocess
+import resource
 
-import django
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+import config
 
-# set up Django
-sys.path.insert(0, r'../../web')
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'esoe_oop_judge.settings')
-django.setup()
-
-from django.conf import settings
-
+config.set_up_django()
 from judge.models import Submission
 
-submission_id = None
 submission = None
 problem = None
 profile = None
 
-submission_id_dir = None
-
-provided_filenames = None
-submitted_filenames = None
-
 def get_submitted_files():
-    global submission_id, submission, problem, profile
-    global submission_id_dir
-    global provided_filenames, submitted_filenames
+    global submission, problem, profile
 
-    # this is safe as bitbucket settings are guaranteed (at model level) to
-    # contain only letters, numbers, hyphens and underscores
-    bitbucket_base_url = 'https://api.bitbucket.org/1.0/repositories/{:s}/{:s}/raw/master/{:d}/'
-    bitbucket_base_url = bitbucket_base_url.format(profile.bitbucket_account,
-                                                   profile.bitbucket_repository,
-                                                   problem.pk)
-
+    # Bitbucket url base string; this is safe as Bitbucket settings are
+    # guaranteed (at model level) to be slugs
+    bitbucket_url_base = (
+        'https://api.bitbucket.org/1.0/repositories/{}/{}/raw/master/{}/{}'
+    ).format(profile.bitbucket_account,
+             profile.bitbucket_repository,
+             problem.pk,
+             '{}')
+    # command base string
+    cmd_base = (
+        'curl'
+        ' --silent'
+        ' --show-error'
+        ' --fail'
+        ' --max-filesize {}'
+        ' --user {}:{}'
+        ' {}'
+        ' --output {}'
+    ).format(shlex.quote(str(config.JUDGE_SUBMISSION_MAX_FILE_SIZE * 1024)),
+             shlex.quote(config.BITBUCKET_EMAIL),
+             shlex.quote(config.BITBUCKET_PASSWORD),
+             '{}',
+             '{}')
+    # get submitted files
+    submitted_filenames = [f.filename for f in problem.requiredfile_set.filter(via='S')]
     for filename in submitted_filenames:
+        bitbucket_url = bitbucket_url_base.format(filename)
+        cmd = cmd_base.format(shlex.quote(bitbucket_url),
+                              shlex.quote(filename))
         try:
-            bitbucket_url = bitbucket_base_url + filename
-
-            subprocess.run(['curl',
-                            '--silent',
-                            '--show-error',
-                            '--fail',
-                            '--max-filesize', str(settings.JUDGE_SUBMISSION_MAX_FILESIZE),
-                            '--user', '{:s}:{:s}'.format(settings.JUDGE_BITBUCKET_EMAIL,
-                                                         settings.JUDGE_BITBUCKET_PASSWORD),
-                            bitbucket_url,
-                            '--output', filename],
+            subprocess.run(shlex.split(cmd),
                            stdin=subprocess.PIPE,
                            stdout=subprocess.PIPE,
                            stderr=subprocess.PIPE,
                            universal_newlines=True,
-                           timeout=settings.JUDGE_SUBMISSION_TIMEOUT,
+                           timeout=config.JUDGE_SUBMISSION_TIMEOUT,
                            check=True)
         except subprocess.TimeoutExpired as e:
-            submission.detail_message = 'Submission of \'{:s}\' timed out.'.format(filename),
-
             submission.status = 'SE'
+            submission.detail_message = (
+                'Submission of \'{}\' timed out.'
+            ).format(filename)
             submission.save()
             sys.exit(1)
         except subprocess.CalledProcessError as e:
             if e.returncode == 22:
-                submission.detail_message = ('\'{:s}\' was not found at \'{:s}\''
-                                             ' (if the file actually exists,'
-                                             ' then you should check if you have'
-                                             ' made the repository accessible to'
-                                             ' the judge\'s Bitbucket account;'
-                                             ' for details, please refer to the'
-                                             ' instructions on the home page).').format(filename,
-                                                                                        bitbucket_url)
+                submission.status = 'SE'
+                submission.detail_message = (
+                    '\'{}\' was not found at \'{}\' (if the file actually'
+                    ' exists, then you should check if you have made the'
+                    ' repository accessible to the judge\'s Bitbucket account;'
+                    ' for details, please refer to the instructions on the home'
+                    ' page).'
+                ).format(filename,
+                         bitbucket_url)
             elif e.returncode == 63:
-                submission.detail_message = ('\'{:s}\' exceeds the maximum'
-                                             ' file size.').format(filename)
+                submission.status = 'SE'
+                submission.detail_message = (
+                    '\'{}\' exceeds the maximum file size limit ({} KB(s)).'
+                ).format(filename,
+                         config.JUDGE_SUBMISSION_MAX_FILE_SIZE)
             else:
-                submission.detail_message = ('The following error(s) occurred during'
-                                             ' the submission of \'{:s}\':\n\n{:s}').format(filename,
-                                                                                            e.stderr)
-
-            submission.status = 'SE'
+                submission.status = 'SE'
+                submission.detail_message = (
+                    'The following error(s) occurred during the submission of'
+                    ' \'{}\':\n\n{}'
+                ).format(filename,
+                         e.stderr)
             submission.save()
             sys.exit(1)
 
-def compile_submitted_files():
-    global submission_id, submission, problem, profile
-    global submission_id_dir
-    global provided_filenames, submitted_filenames
+def compile():
+    global submission, problem, profile
 
+    # copy Main.java and provided files to here
+    problem_id_dir = os.path.join(config.JUDGE_PROBLEMS_DIR, str(problem.pk))
+    problem_id_provided_dir = os.path.join(config.JUDGE_PROBLEMS_STATIC_PROBLEMS_DIR, str(problem.pk))
+    provided_filenames = [f.filename for f in problem.requiredfile_set.filter(via='P')]
+    shutil.copy(os.path.join(problem_id_dir, 'Main.java'), '.')
+    for filename in provided_filenames:
+        shutil.copy(os.path.join(problem_id_provided_dir, filename), '.')
+
+    # compile
+    cmd = (
+        'javac'
+        ' Main.java'
+    )
     try:
-        # only submitted source files should be compiled
-        subprocess.run((['javac'] + submitted_filenames),
+        subprocess.run(shlex.split(cmd),
                        stdin=subprocess.PIPE,
                        stdout=subprocess.PIPE,
                        stderr=subprocess.PIPE,
                        universal_newlines=True,
-                       timeout=settings.JUDGE_COMPILATION_TIMEOUT,
+                       timeout=config.JUDGE_COMPILATION_TIMEOUT,
                        check=True)
     except subprocess.TimeoutExpired as e:
-        submission.detail_message = 'Compilation timed out.'
-
         submission.status = 'CE'
+        submission.detail_message = (
+            'Compilation timed out.'
+        )
         submission.save()
         sys.exit(1)
     except subprocess.CalledProcessError as e:
-        submission.detail_message = ('The following error(s) occurred during'
-                                     ' the compilation:\n\n{:s}').format(e.stderr)
-
         submission.status = 'CE'
+        submission.detail_message = (
+            'The following error(s) occurred during the compilation:\n\n{:s}'
+        ).format(e.stderr),
         submission.save()
         sys.exit(1)
 
-def main():
-    global submission_id, submission, problem, profile
-    global submission_id_dir
-    global provided_filenames, submitted_filenames
+def set_rlimit_fsize():
+    # set the maximum output size limit (in bytes)
+    resource.setrlimit(resource.RLIMIT_FSIZE,
+                       (config.JUDGE_EXECUTION_MAX_OUTPUT_SIZE * 1024,
+                        config.JUDGE_EXECUTION_MAX_OUTPUT_SIZE * 1024))
+def execute():
+    global submission, problem, profile
 
-    if len(sys.argv) != 2:
-        print('usage: {:s} submission_id'.format(sys.argv[0]), file=sys.stderr)
+    # execute
+    # TODO: timeout
+    cmd = (
+        'java'
+        ' -Djava.security.manager'
+        ' -Djava.security.policy=={}'
+        ' Main'
+    ).format(shlex.quote(os.path.join(config.JUDGE_POLICIES_DIR, 'default.policy')))
+    try:
+        # FIXME:
+        #
+        # As JVM doesn't seem to handle SIGXFSZ properly, the program won't
+        # stop running upon exceeding the maximum output size limit;
+        # instead, it will continue running, but with a restriction imposed
+        # by the operating system on its following output.
+        #
+        # Although the operating system will restrict the program's
+        # following output, this is still not desired since, in this way,
+        # the program won't return a special return code and hence we can't
+        # catch it and show an error message to the user.
+        problem_id_dir = os.path.join(config.JUDGE_PROBLEMS_DIR, str(problem.pk))
+        with open(os.path.join(problem_id_dir, 'input.txt')) as fin, open('output.txt', 'w') as fout:
+            subprocess.run(shlex.split(cmd),
+                           stdin=fin,
+                           stdout=fout,
+                           stderr=subprocess.PIPE,
+                           universal_newlines=True,
+                           timeout=config.JUDGE_EXECUTION_TIMEOUT,
+                           check=True,
+                           preexec_fn=set_rlimit_fsize)
+    except subprocess.TimeoutExpired as e:
+        submission.status = 'RE'
+        submission.detail_message = (
+            'Execution timed out.'
+        )
+        submission.save()
+        sys.exit(1)
+    except subprocess.CalledProcessError as e:
+        submission.status = 'RE'
+        submission.detail_message = (
+            'The following error(s) occurred during execution:\n\n{:s}'
+        ).format(e.stderr)
+        submission.save()
         sys.exit(1)
 
-    # basic information
+    # judge
+    cmd = (
+        'diff'
+        ' {}'
+        ' {}'
+    ).format(shlex.quote('output.txt'),
+             shlex.quote(os.path.join(problem_id_dir, 'answer.txt')))
+    try:
+        # diff returns an error code when there're any differences
+        p = subprocess.run(shlex.split(cmd),
+                           stdin=subprocess.PIPE,
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE,
+                           universal_newlines=True,
+                           check=True)
+    except subprocess.CalledProcessError as e:
+        submission.status = 'NA'
+        submission.save()
+        sys.exit(1)
+    submission.status = 'AC'
+    submission.save()
+
+def main():
+    global submission, problem, profile
+
+    if len(sys.argv) != 2:
+        print('usage: {} submission_id'.format(sys.argv[0]),
+              file=sys.stderr)
+        sys.exit(1)
+
     submission_id = int(sys.argv[1])
-    submission = Submission.objects.get(pk=submission_id)
-    problem = submission.problem
-    profile = submission.profile
-
-    submission_id_dir = os.path.join(settings.JUDGE_SUBMISSIONS_DIR, str(submission_id))
-
-    provided_filenames = [f.filename for f in problem.requiredfile_set.filter(via='P')]
-    submitted_filenames = [f.filename for f in problem.requiredfile_set.filter(via='S')]
 
     # create submission_id_dir and chdir to it
-    os.mkdir(submission_id_dir, 0o755)
+    submission_id_dir = os.path.join(config.JUDGE_SUBMISSIONS_DIR, str(submission_id))
+    os.mkdir(submission_id_dir)
     os.chdir(submission_id_dir)
 
     # redirect stdout and stderr
     sys.stdout = open('stdout', 'w')
     sys.stderr = open('stderr', 'w')
 
-    # get submitted files and compile them
+    # basic information
+    submission = Submission.objects.get(pk=submission_id)
+    problem = submission.problem
+    profile = submission.profile
+
+    # get submitted files
     get_submitted_files()
+
+    # compile
     submission.status = 'CO'
     submission.save()
-    compile_submitted_files()
+    compile()
+
+    # execute
+    submission.status = 'JU'
+    submission.save()
+    execute()
 
 if __name__ == '__main__':
     main()
