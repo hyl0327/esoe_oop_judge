@@ -20,15 +20,14 @@
 
     <h3>Bitbucket Settings</h3>
     <div id="bitbucket_div">
-      {# default class : "errorlist nonfield" #}
       {{ update_bitbucket_form.non_field_errors }}
+
       {% for field in update_bitbucket_form %}
       <div class="label_div">
         <label for="{{ field.id_for_label }}" class="bitbucket_label">{{ field.label }}</label>
       </div>
       <div class="field_div">
-        {{ field|add_class:"bitbucket_field" }}
-        {# default class: "errorlist" #}
+        {{ field|add_class:'bitbucket_field' }}
         {{ field.errors }}
       </div>
       {% endfor %}
@@ -37,12 +36,13 @@
     <h3>Change Password</h3>
     <div id="password_div">
       {{ password_change_form.non_field_errors }}
+
       {% for field in password_change_form %}
-      <div class="label_div"> 
+      <div class="label_div">
         <label for="{{ field.id_for_label }}" class="password_label">{{ field.label }}</label>
       </div>
       <div class="field_div">
-        {{ field|add_class:"password_field" }}
+        {{ field|add_class:'password_field' }}
         {{ field.errors }}
       </div>
       {% endfor %}
@@ -65,7 +65,7 @@
         {% for submission in profile.submission_set.all %}
         <tr>
           <td>{{ submission.pk }}</td>
-          <td><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem }}</a></td >
+          <td><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem }}</a></td>
           <td>{{ submission.get_status_display }}</td>
           <td>{{ submission.submission_datetime }}</td>
         </tr>

@@ -13,7 +13,6 @@
     <script type="text/javascript" src="{% static 'judge/js/base.js' %}"></script>
     {% block js %}
     {% endblock %}
-    
   </head>
   <body>
     {% if user.is_authenticated %}
@@ -34,12 +33,11 @@
     {% endif %}
 
     <div id="base_content_div">
-
-    {# TODO: message div #}
+      {# TODO: message div #}
       {% if messages %}
       <div id="messages_div">
         <button id="close" onClick="close_message()">x</button>
-        <ul class="messages" id="messages_ul" >
+        <ul class="messages" id="messages_ul">
           {% for message in messages %}
           <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
           {% endfor %}
@@ -51,8 +49,9 @@
       {% endblock %}
     </div>
 
-    <div id="push"> 
+    <div id="push">
     </div>
+
     <div id="footer">
       <h6>
         Developed by 梁浩穎 (B02505012) and 李蔚成 (B02505006).<br>

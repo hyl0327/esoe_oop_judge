@@ -1,5 +1,5 @@
 /* header element align */
-*{
+* {
     margin: 0;
 }
 
@@ -55,7 +55,7 @@ html, body {
 
 #messages_div ul {
     background: #90EE90;
-    border-radius: 5px;    
+    border-radius: 5px;
     list-style: none;
     padding: 20px 10px;
     font-family: 'Open Sans', sans-serif;
@@ -80,7 +80,7 @@ html, body {
     font-family: Consolas;
 }
 
-#close:hover{
+#close:hover {
     cursor: pointer;
     color: #556B2F;
 }
@@ -92,7 +92,7 @@ html, body {
     margin-top: 100px;
 }
 
-#footer, #push{
+#footer, #push {
     clear: both;
     height: 4em;
     text-align: center;
