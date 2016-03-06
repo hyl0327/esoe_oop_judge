@@ -125,8 +125,8 @@ def compile():
     except subprocess.CalledProcessError as e:
         submission.status = 'CE'
         submission.detail_messages = (
-            'The following error(s) occurred during the compilation:\n\n{:s}'
-        ).format(e.stderr),
+            'The following error(s) occurred during the compilation:\n\n{}'
+        ).format(e.stderr)
         submission.save()
         sys.exit(1)
 
@@ -178,7 +178,7 @@ def execute():
     except subprocess.CalledProcessError as e:
         submission.status = 'RE'
         submission.detail_messages = (
-            'The following error(s) occurred during execution:\n\n{:s}'
+            'The following error(s) occurred during execution:\n\n{}'
         ).format(e.stderr)
         submission.save()
         sys.exit(1)
