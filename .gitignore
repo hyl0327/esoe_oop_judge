@@ -66,3 +66,11 @@ target/
 
 # SQLite
 *.sqlite*
+
+# Judge related files
+judge/submissions/*
+!judge/submissions/.keep
+judge/problems/*
+!judge/problems/.keep
+judge/static/problems/*
+!judge/static/problems/.keep

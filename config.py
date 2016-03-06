@@ -26,8 +26,8 @@ JUDGE_DIR = os.path.join(ROOT_DIR, 'judge')
 JUDGE_BIN_DIR = os.path.join(JUDGE_DIR, 'bin')
 JUDGE_POLICIES_DIR = os.path.join(JUDGE_DIR, 'policies')
 JUDGE_PROBLEMS_DIR = os.path.join(JUDGE_DIR, 'problems')
-JUDGE_PROBLEMS_STATIC_DIR = os.path.join(JUDGE_PROBLEMS_DIR, 'static')
-JUDGE_PROBLEMS_STATIC_PROBLEMS_DIR = os.path.join(JUDGE_PROBLEMS_STATIC_DIR, 'problems')
+JUDGE_STATIC_DIR = os.path.join(JUDGE_DIR, 'static')
+JUDGE_STATIC_PROBLEMS_DIR = os.path.join(JUDGE_STATIC_DIR, 'problems')
 JUDGE_SUBMISSIONS_DIR = os.path.join(JUDGE_DIR, 'submissions')
 
 JUDGE_SUBMISSION_MAX_FILE_SIZE = 10240   # in KBs

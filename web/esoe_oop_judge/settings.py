@@ -133,7 +133,7 @@ DATETIME_FORMAT='Y-m-d, H:i:s'
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [config.JUDGE_PROBLEMS_STATIC_DIR]
+STATICFILES_DIRS = [config.JUDGE_STATIC_DIR]
 
 
 # User authentication
