@@ -3,6 +3,23 @@
     margin: 0;
 }
 
+p {
+    margin: 5px 0px;
+}
+
+h1 {
+    font-size: 250%;
+}
+
+h2 {
+    font-size: 180%;
+}
+
+h3 {
+    font-size: 150%;
+}
+
+
 .floatleft {
     float: left;
 }
@@ -20,7 +37,7 @@ html, body {
     width: 100%;
     top: 0;
     z-index: 9999;
-    background-color: #483D8B;
+    background-color: #FF9364;
     line-height: 20px;
 }
 
@@ -48,36 +65,45 @@ html, body {
 
 #messages_div {
     margin-top: 100px;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     margin-bottom: 20px;
 }
 
-#messages_div ul {
-    background: #90EE90;
+#messages_div ul li {
     border-radius: 5px;
     list-style: none;
-    padding: 20px 10px;
+    padding: 0px 10px;
     font-family: 'Open Sans', sans-serif;
     font-weight: lighter;
     font-size: 20px;
-    color: #228B22;
-}
-
-#messages_div ul li {
     vertical-align: middle;
+    padding: 15px;
+    margin: 15px;
 }
 
+.faded {
+    opacity: 1;
+}
+/*
 #close {
     float: right;
     display: inline-block;
     padding: 2px 5px;
     margin: 3px 3px;
-    background: #90EE90;
     border: none;
     font-size: 20px;
-    color: #228B22;
     font-family: Consolas;
+}*/
+
+.success {
+    background: #90EE90;
+    color: #228B22;
+}
+
+.error {
+    background: #F08080;
+    color: #8B0000;
 }
 
 #close:hover {
@@ -102,4 +128,5 @@ html, body {
 #footer h6 {
     font-family: "Open Sans", sans-serif;
     font-weight: lighter;
+    font-size: 90%;
 }

@@ -14,7 +14,7 @@
     {% block js %}
     {% endblock %}
   </head>
-  <body>
+  <body onload="close_message()">
     {% if user.is_authenticated %}
     <div id="header_div">
       <nav id="header_nav">
@@ -36,8 +36,7 @@
       {# TODO: message div #}
       {% if messages %}
       <div id="messages_div">
-        <button id="close" onClick="close_message()">x</button>
-        <ul class="messages" id="messages_ul">
+        <ul id="messages_ul">
           {% for message in messages %}
           <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
           {% endfor %}

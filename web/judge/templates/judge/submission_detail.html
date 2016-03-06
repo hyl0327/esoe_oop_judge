@@ -3,34 +3,38 @@
 {% load staticfiles %}
 
 {% block css %}
+<link rel="stylesheet" href="{% static 'judge/css/submissions_detail.css' %}">
 {% endblock %}
 
 {% block content %}
-<h2>Submission #{{ submission.pk }}</h2>
+<div id="content_div">
+  <h2>Submission #{{ submission.pk }}</h2>
 
-<h3>Basic Information</h3>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Problem</th>
-      <th>Status</th>
-      <th>Submission Datetime</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{ submission.pk }}</td>
-      <td><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem }}</a></td>
-      <td>{{ submission.get_status_display }}</td>
-      <td>{{ submission.submission_datetime }}</td>
-    </tr>
-  </tbody>
-</table>
+  <h3>Basic Information</h3>
+  <table id="submissions_table">
+    <thead>
+      <tr>
+        <th class="submissions_id">ID</th>
+        <th class="submissions_problem">Problem</th>
+        <th class="submissions_status">Status</th>
+        <th class="submissions_datetime">Datetime</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ submission.pk }}</td>
+        <td><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem }}</a></td>
+        <td>{{ submission.get_status_display }}</td>
+        <td>{{ submission.submission_datetime }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-{% if submission.detail_messages %}
-<h3>Detail Messages</h3>
-{{ submission.detail_messages|linebreaks }}
-{% endif %}
-
+  {% if submission.detail_messages %}
+  <h3>Detail Messages</h3>
+  <div id="detail_messages_div">
+    {{ submission.detail_messages|linebreaks }}
+  </div>
+  {% endif %}
+</div>
 {% endblock %}
