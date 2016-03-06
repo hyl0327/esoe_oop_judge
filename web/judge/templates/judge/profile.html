@@ -7,10 +7,6 @@
 <link rel="stylesheet" href="{% static 'judge/css/profile.css' %}">
 {% endblock %}
 
-{% block js %}
-{# <script src="{% static 'judge/js/base.js' %}"></script> #}
-{% endblock %}
-
 {% block content %}
 <div id="content_div">
   <h2>{{ profile.user.username }} ({{ profile.user.first_name }})</h2>
@@ -58,7 +54,7 @@
           <th class="submissions_id">ID</th>
           <th class="submissions_problem">Problem</th>
           <th class="submissions_status">Status</th>
-          <th class="submissions_datetime">Submission Datetime</th>
+          <th class="submissions_datetime">Datetime</th>
         </tr>
       </thead>
       <tbody>

@@ -11,6 +11,10 @@ h2 {
     margin-top: 30px;
 }
 
+.problem_div p {
+    margin-bottom: 20px;
+}
+
 .problem_div h3, #submissions_div h3 {
     color: #483D8B;
     font-weight: bold;
@@ -24,11 +28,11 @@ h2 {
     border-radius: 3px;
     margin: 15px 0px;
     padding-top: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .problem_div ul li {
-    padding-bottom: 5px;
+    padding: 2px 0px;
 }
 
 #required_files_btn {
@@ -58,6 +62,7 @@ h2 {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
+    font-size: 20px;
 }
 
 #submissions_div table thead {
@@ -93,17 +98,15 @@ h2 {
 }
 
 tr > th {
-    padding: 5px;
+    padding: 10px;
     text-align: center;
     font-family: sans-serif, "Open Sans";
-    font-size: 18px;
 }
 
 tr > td {
-    padding: 5px;
+    padding: 10px;
     text-align: center;
     font-family: sans-serif, "Open Sans";
-    font-size: 17px;
     font-weight: lighter;
 }
 
@@ -112,11 +115,17 @@ td > a {
 }
 
 .submissions_id {
-    width: 8%;
+    width: 20%;
+    text-align: center;
 }
+
 .submissions_status {
-    width: 27%;
+    width: 50%;
+    padding-right: 30px;
+    text-align: center;
 }
+
 .submissions_datetime {
     width: 30%;
+    text-align: center;
 }

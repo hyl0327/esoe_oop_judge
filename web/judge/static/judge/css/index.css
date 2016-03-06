@@ -8,13 +8,14 @@
 
 #index_div h2 {
     margin-left: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-#index_div ul {
-    padding-bottom: 20px;
+#index_div ol {
+    padding-bottom: 15px;
 }
 
-#index_div ul li {
-    padding: 5px;
+#index_div ol li {
+    padding: 2px;
 }
