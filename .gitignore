@@ -58,7 +58,7 @@ docs/_build/
 # PyBuilder
 target/
 
-#Ipython Notebook
+# Ipython Notebook
 .ipynb_checkpoints
 
 # Mac
@@ -66,6 +66,9 @@ target/
 
 # SQLite
 *.sqlite*
+
+# virtualenv
+virtualenv/
 
 # Judge related files
 judge/submissions/*
