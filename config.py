@@ -16,14 +16,20 @@ BITBUCKET_ACCOUNT = 'esoe_oop_judge'
 BITBUCKET_PASSWORD = 'qfTurFvx6u1ZV997H6gZ'
 
 
-# Web related settings
-WEB_DIR = os.path.join(ROOT_DIR, 'web')
+# Virtualenv related settings
+VIRTUALENV_DIR = os.path.join(ROOT_DIR, 'virtualenv')
+
+VIRTUALENV_BIN_DIR = os.path.join(VIRTUALENV_DIR, 'bin')
 
 
 # DB related settings
 DB_NAME = 'esoe_oop_judge'
 DB_USER = 'esoe_oop_judge'
 DB_PASSWORD = 'zxt5t5NuT4HETiKl'
+
+
+# Web related settings
+WEB_DIR = os.path.join(ROOT_DIR, 'web')
 
 
 # Judge related settings
