@@ -71,7 +71,7 @@ def problem_detail(request, pk):
             submission.save()
 
             # judge (without waiting)
-            subprocess.Popen([os.path.join(config.JUDGE_BIN_DIR, 'judge.py'),
+            subprocess.Popen([os.path.join(config.JUDGE_BIN_DIR, 'judge'),
                               str(submission.pk)],
                              cwd=config.JUDGE_BIN_DIR)
 
