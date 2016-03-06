@@ -8,17 +8,16 @@ p {
 }
 
 h1 {
-    font-size: 250%;
+    font-size: 280%;
 }
 
 h2 {
-    font-size: 180%;
+    font-size: 230%;
 }
 
 h3 {
-    font-size: 150%;
+    font-size: 180%;
 }
-
 
 .floatleft {
     float: left;
