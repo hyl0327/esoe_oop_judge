@@ -86,7 +86,7 @@
     <tbody>
       {% for submission in profile_submission_list %}
       <tr>
-        <td>{{ submission.pk }}</td>
+        <td><a href="{% url 'judge:submission_detail' submission.pk %}">{{ submission.pk }}</a></td>
         <td>{{ submission.get_status_display }}</td>
         <td>{{ submission.submission_datetime }}</td>
       </tr>
