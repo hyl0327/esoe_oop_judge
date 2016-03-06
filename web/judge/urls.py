@@ -28,4 +28,8 @@ urlpatterns = [
     url(r'^profile/$',
         login_required(views.profile),
         name='profile'),
+
+    url(r'^submissions/(?P<pk>\d+)/$',
+        login_required(views.submission_detail),
+        name='submission_detail'),
 ]

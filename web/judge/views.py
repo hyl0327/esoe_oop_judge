@@ -76,7 +76,6 @@ def problem_detail(request, pk):
                              cwd=config.JUDGE_BIN_DIR)
 
             messages.success(request, 'Submitting.')
-
         return HttpResponseRedirect(reverse('judge:problem_detail', kwargs={'pk': pk}))
 
     profile_submission_list = problem.submission_set.filter(profile=profile)
@@ -148,3 +147,18 @@ def profile(request):
                   {'profile': profile,
                    'update_bitbucket_form': update_bitbucket_form,
                    'password_change_form': password_change_form})
+
+def submission_detail(request, pk):
+    profile = request.user.profile
+
+    submission = get_object_or_404(Submission, pk=pk)
+
+    # see if this submission belongs to this profile
+    if submission.profile != profile:
+        messages.error(request,
+                       'Permission denied. You must know why!')
+        return HttpResponseRedirect(reverse('judge:index'))
+
+    return render(request,
+                  'judge/submission_detail.html',
+                  {'submission': submission})

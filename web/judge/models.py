@@ -78,7 +78,7 @@ class Submission(models.Model):
                               db_index=True)
     submission_datetime = models.DateTimeField()
 
-    detail_message = models.TextField(blank=True)
+    detail_messages = models.TextField(blank=True)
 
     def __str__(self):
         return '#{} (Problem={}, Profile={})'.format(self.pk,
