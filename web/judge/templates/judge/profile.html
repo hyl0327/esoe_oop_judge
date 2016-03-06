@@ -7,38 +7,46 @@
 <link rel="stylesheet" href="{% static 'judge/css/profile.css' %}">
 {% endblock %}
 
+{% block js %}
+{# <script src="{% static 'judge/js/base.js' %}"></script> #}
+{% endblock %}
+
 {% block content %}
 <div id="content_div">
   <h2>{{ profile.user.username }} ({{ profile.user.first_name }})</h2>
 
-  <h3>Bitbucket Settings & Change Password</h3>
   <form method="post" action="{% url 'judge:profile' %}">
     {% csrf_token %}
 
+    <h3>Bitbucket Settings</h3>
     <div id="bitbucket_div">
       {# default class : "errorlist nonfield" #}
       {{ update_bitbucket_form.non_field_errors }}
       {% for field in update_bitbucket_form %}
-      <div class="sub_bitbucket_div">
+      <div class="label_div">
+        <label for="{{ field.id_for_label }}" class="bitbucket_label">{{ field.label }}</label>
+      </div>
+      <div class="field_div">
+        {{ field|add_class:"bitbucket_field" }}
         {# default class: "errorlist" #}
         {{ field.errors }}
-        <label for="{{ field.id_for_label }}" class="bitbucket_label">{{ field.label }}</label>
-        {{ field|add_class:"bitbucket_field" }}
       </div>
       {% endfor %}
     </div>
 
+    <h3>Change Password</h3>
     <div id="password_div">
       {{ password_change_form.non_field_errors }}
       {% for field in password_change_form %}
-      <div class="sub_password_div">
-        {{ field.errors }}
+      <div class="label_div"> 
         <label for="{{ field.id_for_label }}" class="password_label">{{ field.label }}</label>
+      </div>
+      <div class="field_div">
         {{ field|add_class:"password_field" }}
+        {{ field.errors }}
       </div>
       {% endfor %}
     </div>
-
     <input type="submit" value="Update" id="update_btn">
   </form>
 

@@ -1,4 +1,8 @@
 /* header element align */
+*{
+    margin: 0;
+}
+
 .floatleft {
     float: left;
 }
@@ -6,7 +10,8 @@
     float: right;
 }
 
-body {
+html, body {
+    height: 80%;
     font: caption;
 }
 
@@ -41,11 +46,60 @@ body {
     color: #ffffff;
 }
 
+#messages_div {
+    margin-top: 100px;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+#messages_div ul {
+    background: #90EE90;
+    border-radius: 5px;    
+    list-style: none;
+    padding: 20px 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+    font-size: 20px;
+    color: #228B22;
+}
+
+#messages_div ul li {
+    vertical-align: middle;
+}
+
+#close {
+    float: right;
+    display: inline-block;
+    padding: 2px 5px;
+    margin: 3px 3px;
+    background: #90EE90;
+    border: none;
+    font-size: 20px;
+    color: #228B22;
+    font-family: Consolas;
+}
+
+#close:hover{
+    cursor: pointer;
+    color: #556B2F;
+}
+
 #base_content_div {
-    width:auto;
+    min-height: 100%;
+    height: auto !important;
+    margin: 0 auto -4em;
     margin-top: 100px;
 }
 
-footer {
+#footer, #push{
+    clear: both;
+    height: 4em;
     text-align: center;
+    margin-top: 30px;
+}
+
+#footer h6 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: lighter;
 }

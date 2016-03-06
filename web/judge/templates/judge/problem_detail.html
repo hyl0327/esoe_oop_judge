@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="{% static 'judge/css/problem_detail.css' %}">
 {% endblock %}
 
+{% block js %}
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+{% endblock %}
+
 {% block content %}
 <div id="detail_div">
   <h2>{{ profile_solved|yesno:'[Solved] ,' }}{{ problem }}</h2>
@@ -62,13 +66,12 @@
       {% endfor %}
     </ul>
   </div>
+  <form method="post" action="{% url 'judge:problem_detail' problem.pk %}">
+    {% csrf_token %}
+
+    <input type="submit" value="Submit" id="required_files_btn">
+  </form>
 </div>
-
-<form method="post" action="{% url 'judge:problem_detail' problem.pk %}">
-  {% csrf_token %}
-
-  <input type="submit" value="Submit">
-</form>
 
 <div id="submissions_div">
   <h3>My Submissions</h3>

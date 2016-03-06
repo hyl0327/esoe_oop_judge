@@ -8,30 +8,103 @@ h2 {
 }
 
 .problem_div {
-    margin-top: 20px;
+    margin-top: 30px;
+}
+
+.problem_div h3, #submissions_div h3 {
+    color: #483D8B;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.problem_div ul {
+    /* In Required_files' div */
+    border: 1px solid #C0C0C0;
+    border-radius: 3px;
+    margin: 15px 0px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.problem_div ul li {
+    padding-bottom: 5px;
+}
+
+#required_files_btn {
+    width: auto;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    background: #6A5ACD;
+    color: #FFFFFF;
+    border: none;
 }
 
 .sample_io {
     border: 1px solid #C0C0C0;
     background: #E4E4E4;
     border-radius: 5px;
-    padding-left: 10px;
+    padding: 10px;
+    font-family: "Consolas";
+}
+
+#submissions_div {
+    margin-top: 50px;
 }
 
 #submissions_div table {
     width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #D3D3D3;
-    font-family: "Open Sans";
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 #submissions_div table thead {
     background: #D3D3D3;
 }
 
-td, th {
+#submissions_div table thead tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+#submissions_div table thead tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+#submissions_div table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+#submissions_div table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+#submissions_div table tbody tr td:first-child {
+    border-left: 1px solid #D3D3D3;
+}
+
+#submissions_div table tbody tr td:last-child {
+    border-right: 1px solid #D3D3D3;
+}
+
+#submissions_div table tbody tr:last-child td {
+    border-bottom: 1px solid #D3D3D3;
+}
+
+tr > th {
     padding: 5px;
     text-align: center;
+    font-family: sans-serif, "Open Sans";
+    font-size: 18px;
+}
+
+tr > td {
+    padding: 5px;
+    text-align: center;
+    font-family: sans-serif, "Open Sans";
+    font-size: 17px;
+    font-weight: lighter;
 }
 
 td > a {
@@ -39,10 +112,10 @@ td > a {
 }
 
 .submissions_id {
-    width: 5%;
+    width: 8%;
 }
 .submissions_status {
-    width: 25%;
+    width: 27%;
 }
 .submissions_datetime {
     width: 30%;

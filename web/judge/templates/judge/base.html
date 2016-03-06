@@ -6,10 +6,14 @@
     <meta charset="utf-8">
     <title>ESOE OOP Judge</title>
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'judge/css/base.css' %}">
     {% block css %}
     {% endblock %}
+
+    <script type="text/javascript" src="{% static 'judge/js/base.js' %}"></script>
+    {% block js %}
+    {% endblock %}
+    
   </head>
   <body>
     {% if user.is_authenticated %}
@@ -29,24 +33,31 @@
     </div>
     {% endif %}
 
-    {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-
     <div id="base_content_div">
+
+    {# TODO: message div #}
+      {% if messages %}
+      <div id="messages_div">
+        <button id="close" onClick="close_message()">x</button>
+        <ul class="messages" id="messages_ul" >
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
       {% block content %}
       {% endblock %}
     </div>
 
-    <footer>
+    <div id="push"> 
+    </div>
+    <div id="footer">
       <h6>
         Developed by 梁浩穎 (B02505012) and 李蔚成 (B02505006).<br>
         Credits to <a target="_blank" href="http://ada2015.csie.org">ADA2015</a> for inspiration.
       </h6>
-    </footer>
+    </div>
   </body>
 </html>
