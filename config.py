@@ -20,6 +20,12 @@ BITBUCKET_PASSWORD = 'qfTurFvx6u1ZV997H6gZ'
 WEB_DIR = os.path.join(ROOT_DIR, 'web')
 
 
+# DB related settings
+DB_NAME = 'esoe_oop_judge'
+DB_USER = 'esoe_oop_judge'
+DB_PASSWORD = 'zxt5t5NuT4HETiKl'
+
+
 # Judge related settings
 JUDGE_DIR = os.path.join(ROOT_DIR, 'judge')
 
