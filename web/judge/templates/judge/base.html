@@ -7,6 +7,7 @@
     <title>ESOE OOP Judge</title>
 
     <link rel="stylesheet" href="{% static 'judge/css/base.css' %}">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     {% block css %}
     {% endblock %}
 
@@ -14,7 +15,7 @@
     {% block js %}
     {% endblock %}
   </head>
-  <body onload="close_message()">
+  <body>
     {% if user.is_authenticated %}
     <div id="header_div">
       <nav id="header_nav">
@@ -25,7 +26,7 @@
             <li><a href="{% url 'judge:profile' %}">Profile</a></li>
           </div>
           <div class="floatright">
-            <li><a href="{% url 'judge:logout' %}">Logout</a></li>
+            <li><span class="glyphicon glyphicon-log-out" style="color:#FFFFFF"><a href="{% url 'judge:logout' %}">Logout</a></li>
           </div>
         </ul>
       </nav>
@@ -38,7 +39,8 @@
       <div id="messages_div">
         <ul id="messages_ul">
           {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          <button id="close{{ forloop.counter0 }}" onclick="close_message({{ forloop.counter0 }})" class="{{ message.tags }} "><span class="glyphicon glyphicon-remove"></span></button>
+          <li id="close_li{{ forloop.counter0 }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
           {% endfor %}
         </ul>
       </div>
