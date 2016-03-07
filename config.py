@@ -31,6 +31,12 @@ DB_PASSWORD = 'zxt5t5NuT4HETiKl'
 # Web related settings
 WEB_DIR = os.path.join(ROOT_DIR, 'web')
 
+WEB_SECRET_KEY = '^1&vzcf@^j8&lyaxs1hus6k69=aw4$x*#&794g&abj)=be6(gr'
+
+WEB_HOST = 'oopjudge.cklab.org'
+
+WEB_STATIC_ROOT = os.path.join(WEB_DIR, 'static')
+
 
 # Judge related settings
 JUDGE_DIR = os.path.join(ROOT_DIR, 'judge')

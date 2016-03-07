@@ -26,12 +26,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^1&vzcf@^j8&lyaxs1hus6k69=aw4$x*#&794g&abj)=be6(gr'
+SECRET_KEY = config.WEB_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['oopjudge.cklab.org']
+ALLOWED_HOSTS = [config.WEB_HOST]
 
 
 # Application definition
@@ -135,7 +135,7 @@ DATETIME_FORMAT='Y-m-d, H:i:s'
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(config.WEB_DIR, 'static')
+STATIC_ROOT = config.WEB_STATIC_ROOT
 STATICFILES_DIRS = [config.JUDGE_STATIC_DIR]
 
 
