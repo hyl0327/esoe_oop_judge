@@ -135,6 +135,7 @@ tbody > tr:nth-child(even) {
 
 .submissions_problem {
     width: 30%;
+    text-align: center;
 }
 
 .submissions_status {
