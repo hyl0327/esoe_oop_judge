@@ -10,12 +10,52 @@
 <div id="index_div">
   <h2>How to submit?</h2>
   <ol>
-    <li>TBA</li>
-  </ol>
-
-  <h2>How are submissions judged?</h2>
-  <ol>
-    <li>TBA</li>
+    <li>
+      Register an account at
+      <a href="https://bitbucket.org/" target="_blank">Bitbucket</a> with your
+      NTU Mail to get an academic plan.
+    </li>
+    <li>
+      Create a new repository for this course.
+    </li>
+    <li>
+      Share the repository to the account
+      <code>{{ bitbucket_account }}</code> (only READ access permission is
+      needed).
+    </li>
+    <li>
+      Set up the Bitbucket settings in your profile.
+    </li>
+    <li>
+      Clone the repository into your workspace (<code>git clone</code>).
+    </li>
+    <li>
+      In the directory you just cloned, create a directory named
+      <code>{{ sample_problem.pk }}</code>
+      (<code>mkdir {{ sample_problem.pk }}</code>).
+    </li>
+    <li>
+      Add the required submitted files (with your solutions, of course) as
+      specified in
+      <a href={% url 'judge:problem_detail' pk=sample_problem.pk %}>{{ sample_problem }}</a>
+      to <code>{{ sample_problem.pk }}</code>.
+    </li>
+    <li>
+      Commit and push
+      (<code>git add</code>, <code>git commit</code>, and then <code>git push</code>).
+    </li>
+    <li>
+      Click the submit button in
+      <a href={% url 'judge:problem_detail' pk=sample_problem.pk %}>{{ sample_problem }}</a>.
+    </li>
+    <li>
+      See if there are any errors; if so, then go back to debug and submit again
+      when you have done debugging.
+    </li>
+    <li>
+      Do not forget to change <code>{{ sample_problem.pk }}</code> to the
+      corresponding problem ID when you are solving other problems.
+    </li>
   </ol>
 </div>
 {% endblock %}
