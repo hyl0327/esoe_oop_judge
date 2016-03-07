@@ -21,7 +21,12 @@ from django.contrib.auth.forms import PasswordChangeForm
 from .forms import ProfileUpdateBitbucketForm
 
 def index(request):
-    return render(request, 'judge/index.html')
+    sample_problem = Problem.objects.get(pk=1)
+
+    return render(request,
+                  'judge/index.html',
+                  {'bitbucket_account': config.BITBUCKET_ACCOUNT,
+                   'sample_problem': sample_problem})
 
 def login(request):
     # users should not be able to log in again if there're already logged in
