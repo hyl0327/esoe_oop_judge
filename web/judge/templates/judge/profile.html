@@ -20,7 +20,7 @@
 
       {% for field in update_bitbucket_form %}
       <div class="label_div">
-        <label for="{{ field.id_for_label }}" class="bitbucket_label">{{ field.label }}</label>
+        <label for="{{ field.id_for_label }}" class="bitbucket_label">{{ field.label }} (in lower case)</label>
       </div>
       <div class="field_div">
         {{ field|add_class:'bitbucket_field' }}
