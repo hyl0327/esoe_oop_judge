@@ -49,8 +49,11 @@ h2 {
     border: 1px solid #C0C0C0;
     background: #E4E4E4;
     border-radius: 5px;
-    padding: 10px;
     font-family: monospace, Consolas;
+}
+
+.sample_io p {
+    margin: 15px;
 }
 
 #submissions_div {
