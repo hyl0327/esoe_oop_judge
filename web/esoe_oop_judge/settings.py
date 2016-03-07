@@ -31,7 +31,7 @@ SECRET_KEY = '^1&vzcf@^j8&lyaxs1hus6k69=aw4$x*#&794g&abj)=be6(gr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['v2.javajudge.cklab.org']
+ALLOWED_HOSTS = ['oopjudge.cklab.org']
 
 
 # Application definition
