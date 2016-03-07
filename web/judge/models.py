@@ -15,7 +15,6 @@ class Problem(models.Model):
     sample_output = models.TextField()
 
     time_limit = models.IntegerField()    # in ms
-    memory_limit = models.IntegerField()  # in KBs
 
     deadline_datetime = models.DateTimeField()
 
@@ -72,7 +71,6 @@ class Submission(models.Model):
                                        ('AC', 'Accepted'),
                                        ('NA', 'Not Accepted'),
                                        ('TL', 'Time Limit Exceeded'),
-                                       ('ML', 'Memory Limit Exceeded'),
                                        ('RE', 'Runtime Error')),
                               default='SU',
                               db_index=True)

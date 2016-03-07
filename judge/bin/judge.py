@@ -68,11 +68,11 @@ def get_submitted_files():
             if e.returncode == 22:
                 submission.status = 'SE'
                 submission.detail_messages = (
-                    '\'{}\' was not found at \'{}\' (if the file actually'
+                    '\'{}\' was not found at \'{}\'.\n\nIf the file actually'
                     ' exists, then you should check if you have made the'
                     ' repository accessible to the judge\'s Bitbucket account;'
                     ' for details, please refer to the instructions on the home'
-                    ' page).'
+                    ' page.'
                 ).format(filename,
                          bitbucket_url)
             elif e.returncode == 63:
@@ -125,8 +125,8 @@ def compile():
     except subprocess.CalledProcessError as e:
         submission.status = 'CE'
         submission.detail_messages = (
-            'The following error(s) occurred during the compilation:\n\n{:s}'
-        ).format(e.stderr),
+            'The following error(s) occurred during the compilation:\n\n{}'
+        ).format(e.stderr)
         submission.save()
         sys.exit(1)
 
@@ -178,7 +178,7 @@ def execute():
     except subprocess.CalledProcessError as e:
         submission.status = 'RE'
         submission.detail_messages = (
-            'The following error(s) occurred during execution:\n\n{:s}'
+            'The following error(s) occurred during execution:\n\n{}'
         ).format(e.stderr)
         submission.save()
         sys.exit(1)
