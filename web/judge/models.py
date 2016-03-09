@@ -14,8 +14,6 @@ class Problem(models.Model):
     sample_input = models.TextField()
     sample_output = models.TextField()
 
-    time_limit = models.IntegerField()    # in ms
-
     deadline_datetime = models.DateTimeField()
 
     def __str__(self):
