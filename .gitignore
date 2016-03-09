@@ -67,11 +67,8 @@ target/
 # SQLite
 *.sqlite*
 
-# virtualenv
+# Virtualenv
 virtualenv/
-
-# Web related files
-web/static/
 
 # Judge related files
 judge/submissions/*
@@ -80,3 +77,9 @@ judge/problems/*
 !judge/problems/.keep
 judge/static/problems/*
 !judge/static/problems/.keep
+
+# Web related files
+web/static/*
+!web/static/.keep
+!web/static/robots.txt
+!web/static/favicon.ico
