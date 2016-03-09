@@ -58,5 +58,5 @@ BITBUCKET_PASSWORD = 'qfTurFvx6u1ZV997H6gZ'
 # Utility functions
 def set_up_django():
     sys.path.insert(0, WEB_DIR)
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'esoe_oop_judge.settings')
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'esoe_oop_judge.settings'
     django.setup()
