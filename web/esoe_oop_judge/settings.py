@@ -16,19 +16,19 @@ import config
 
 # Web base directory
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = config.WEB_DIR
 
 
-# Quick-start development settings - unsuitable for production
+# Deployment
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config.DEBUG
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.WEB_SECRET_KEY
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = [config.WEB_HOST]
+ALLOWED_HOSTS = config.WEB_ALLOWED_HOSTS
 
 
 # Application definition
@@ -79,14 +79,22 @@ WSGI_APPLICATION = 'esoe_oop_judge.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config.DB_NAME,
-        'USER': config.DB_USER,
-        'PASSWORD': config.DB_PASSWORD,
+if config.DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config.DB_NAME,
+            'USER': config.DB_USER,
+            'PASSWORD': config.DB_PASSWORD,
+        }
+    }
 
 
 # Password validation
@@ -115,8 +123,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Taipei'
 
-# we in intentionally disable internationalization/localization related
-# settings in order for users to see consistent pages from everywhere
+# we intentionally disable internationalization/localization related settings in
+# order for users to see consistent contents from everywhere
 USE_I18N = False
 USE_L10N = False
 
@@ -125,14 +133,16 @@ USE_L10N = False
 USE_TZ = False
 
 # YYYY-MM-DD HH:MM:SS
-DATETIME_FORMAT='Y-m-d, H:i:s'
+DATETIME_FORMAT='Y-m-d H:i:s'
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = config.WEB_STATIC_ROOT
+STATIC_ROOT = os.path.join(config.WEB_DIR, 'static')
+
+# include the static directory of judge
 STATICFILES_DIRS = [config.JUDGE_STATIC_DIR]
 
 
