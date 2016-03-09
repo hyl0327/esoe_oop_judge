@@ -8,7 +8,7 @@
 }
 
 #content_div h3 {
-    color: #483D8B;
+    color: #53829E;
     margin-bottom: 10px;
 }
 
@@ -86,6 +86,7 @@ tbody > tr:nth-child(even) {
 
 .submissions_problem {
     width: 30%;
+    text-align: center;
 }
 
 .submissions_status {
