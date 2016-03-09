@@ -30,10 +30,10 @@
     </tbody>
   </table>
 
-  {% if submission.detail_messages %}
-  <h3>Detail Messages</h3>
-  <div id="detail_messages_div">
-    {{ submission.detail_messages|linebreaks }}
+  {% if submission.detailed_messages %}
+  <h3>Detailed Messages</h3>
+  <div id="detailed_messages_div">
+    {{ submission.detailed_messages|linebreaks }}
   </div>
   {% endif %}
 </div>

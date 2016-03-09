@@ -59,7 +59,7 @@ def get_submitted_files():
                            check=True)
         except subprocess.TimeoutExpired as e:
             submission.status = 'SE'
-            submission.detail_messages = (
+            submission.detailed_messages = (
                 'Submission of \'{}\' timed out.'
             ).format(filename)
             submission.save()
@@ -67,7 +67,7 @@ def get_submitted_files():
         except subprocess.CalledProcessError as e:
             if e.returncode == 22:
                 submission.status = 'SE'
-                submission.detail_messages = (
+                submission.detailed_messages = (
                     '\'{}\' was not found at \'{}\'.\n\n'
                     'Please make sure you have correctly set up the Bitbucket'
                     ' settings in the profile page and that the file actually'
@@ -81,13 +81,13 @@ def get_submitted_files():
                          bitbucket_url)
             elif e.returncode == 63:
                 submission.status = 'SE'
-                submission.detail_messages = (
+                submission.detailed_messages = (
                     '\'{}\' exceeds the maximum file size limit ({} KB(s)).'
                 ).format(filename,
                          config.JUDGE_SUBMISSION_MAX_FILE_SIZE)
             else:
                 submission.status = 'SE'
-                submission.detail_messages = (
+                submission.detailed_messages = (
                     'The following error(s) occurred during the submission of'
                     ' \'{}\':\n\n{}'
                 ).format(filename,
@@ -121,14 +121,14 @@ def compile():
                        check=True)
     except subprocess.TimeoutExpired as e:
         submission.status = 'CE'
-        submission.detail_messages = (
+        submission.detailed_messages = (
             'Compilation timed out.'
         )
         submission.save()
         sys.exit(1)
     except subprocess.CalledProcessError as e:
         submission.status = 'CE'
-        submission.detail_messages = (
+        submission.detailed_messages = (
             'The following error(s) occurred during the compilation:\n\n{}'
         ).format(e.stderr)
         submission.save()
@@ -174,14 +174,14 @@ def execute():
                            preexec_fn=set_rlimit_fsize)
     except subprocess.TimeoutExpired as e:
         submission.status = 'RE'
-        submission.detail_messages = (
+        submission.detailed_messages = (
             'Execution timed out.'
         )
         submission.save()
         sys.exit(1)
     except subprocess.CalledProcessError as e:
         submission.status = 'RE'
-        submission.detail_messages = (
+        submission.detailed_messages = (
             'The following error(s) occurred during execution:\n\n{}'
         ).format(e.stderr)
         submission.save()

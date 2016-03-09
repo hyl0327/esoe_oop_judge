@@ -99,12 +99,12 @@ tbody > tr:nth-child(even) {
     text-align: center;
 }
 
-#detail_messages_div {
+#detailed_messages_div {
     border: 1px solid #C0C0C0;
     border-radius: 5px;
     padding: 0px 15px;
 }
 
-#detail_messages_div p {
+#detailed_messages_div p {
     margin: 15px 0px;
 }
