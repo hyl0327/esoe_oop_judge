@@ -29,15 +29,19 @@ def index(request):
                    'sample_problem': sample_problem})
 
 def login(request):
-    # users should not be able to log in again if there're already logged in
+    # users should not be able to log in again if they're already logged in
     if request.user.is_authenticated():
+        messages.error(request,
+                       'You are already logged in.')
         return HttpResponseRedirect(reverse('judge:index'))
     else:
         return auth_views.login(request, template_name='judge/login.html')
 
 def logout(request):
-    # users should not be able to log out if there're not already logged in
+    # users should not be able to log out if they're not logged in yet
     if not request.user.is_authenticated():
+        messages.error(request,
+                       'You are not logged in yet.')
         return HttpResponseRedirect(reverse('judge:index'))
     else:
         return auth_views.logout(request, next_page='judge:index')
@@ -162,7 +166,7 @@ def submission_detail(request, pk):
     # see if this submission belongs to this profile
     if submission.profile != profile:
         messages.error(request,
-                       'Permission denied. You must know why!')
+                       'Permission denied.')
         return HttpResponseRedirect(reverse('judge:index'))
 
     return render(request,
