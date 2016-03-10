@@ -60,7 +60,7 @@ def get_submitted_files():
         except subprocess.TimeoutExpired as e:
             submission.status = 'SE'
             submission.detailed_messages = (
-                'Submission of \'{}\' timed out.'
+                'The submission of <code>{}</code> timed out.'
             ).format(filename)
             submission.save()
             sys.exit(1)
@@ -68,26 +68,30 @@ def get_submitted_files():
             if e.returncode == 22:
                 submission.status = 'SE'
                 submission.detailed_messages = (
-                    '\'{}\' was not found at \'{}\'.\n\n'
+                    '<code>{0}</code> was not found at'
+                    ' <a href="{1}" target="_blank">{1}</a>.\n\n'
                     'Please make sure you have correctly set up the Bitbucket'
                     ' settings in the profile page and that the file actually'
                     ' exists. Also, please make sure that you have made the'
-                    ' repository accessible to the judge\'s Bitbucket account;'
-                    ' for details, please refer to the guidelines on the home'
+                    ' repository accessible to the judge\'s Bitbucket'
+                    ' account.\n\n'
+                    'For details, please refer to the guidelines on the home'
                     ' page.'
                 ).format(filename,
                          bitbucket_url)
             elif e.returncode == 63:
                 submission.status = 'SE'
                 submission.detailed_messages = (
-                    '\'{}\' exceeds the maximum file size limit ({} KB(s)).'
+                    '<code>{}</code> exceeds the maximum file size limit'
+                    ' ({} KBs).'
                 ).format(filename,
                          config.JUDGE_SUBMISSION_MAX_FILE_SIZE)
             else:
                 submission.status = 'SE'
                 submission.detailed_messages = (
-                    'The following error(s) occurred during the submission of'
-                    ' \'{}\':\n\n{}'
+                    'The following errors occurred during the submission of'
+                    ' <code>{}</code>:\n\n'
+                    '<pre>{}</pre>'
                 ).format(filename,
                          e.stderr)
             submission.save()
@@ -127,7 +131,8 @@ def compile():
     except subprocess.CalledProcessError as e:
         submission.status = 'CE'
         submission.detailed_messages = (
-            'The following error(s) occurred during the compilation:\n\n{}'
+            'The following errors occurred during compilation:\n\n'
+            '<pre>{}</pre>'
         ).format(e.stderr)
         submission.save()
         sys.exit(1)
@@ -180,7 +185,8 @@ def execute():
     except subprocess.CalledProcessError as e:
         submission.status = 'RE'
         submission.detailed_messages = (
-            'The following error(s) occurred during execution:\n\n{}'
+            'The following errors occurred during execution:\n\n'
+            '<pre>{}</pre>'
         ).format(e.stderr)
         submission.save()
         sys.exit(1)

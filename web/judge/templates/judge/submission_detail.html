@@ -33,7 +33,7 @@
   {% if submission.detailed_messages %}
   <h3>Detailed Messages</h3>
   <div id="detailed_messages_div">
-    {{ submission.detailed_messages|linebreaks }}
+    {{ submission.detailed_messages|safe|linebreaks }}
   </div>
   {% endif %}
 </div>
