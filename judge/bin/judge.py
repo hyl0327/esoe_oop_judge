@@ -71,11 +71,9 @@ def get_submitted_files():
                     '\'{}\' was not found at \'{}\'.\n\n'
                     'Please make sure you have correctly set up the Bitbucket'
                     ' settings in the profile page and that the file actually'
-                    ' exists.\n\n'
-                    'If both of them are done but you are still getting this'
-                    ' error, then please also make sure that you have made the'
+                    ' exists. Also, please make sure that you have made the'
                     ' repository accessible to the judge\'s Bitbucket account;'
-                    ' for details, please refer to the instructions on the home'
+                    ' for details, please refer to the guidelines on the home'
                     ' page.'
                 ).format(filename,
                          bitbucket_url)
