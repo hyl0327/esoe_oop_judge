@@ -39,6 +39,8 @@ WEB_SECRET_KEY = '^1&vzcf@^j8&lyaxs1hus6k69=aw4$x*#&794g&abj)=be6(gr'
 
 WEB_ALLOWED_HOSTS = ['oopjudge.cklab.org']
 
+WEB_INDEX_SAMPLE_PROBLEM_ID = 1
+
 
 # DB related settings
 DB_NAME = 'esoe_oop_judge'

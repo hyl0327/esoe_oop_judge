@@ -21,7 +21,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from .forms import ProfileUpdateBitbucketForm
 
 def index(request):
-    sample_problem = Problem.objects.get(pk=1)
+    sample_problem = Problem.objects.get(pk=config.WEB_INDEX_SAMPLE_PROBLEM_ID)
 
     return render(request,
                   'judge/index.html',
