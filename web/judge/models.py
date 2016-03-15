@@ -68,7 +68,6 @@ class Submission(models.Model):
                                        ('JU', 'Judging'),
                                        ('AC', 'Accepted'),
                                        ('NA', 'Not Accepted'),
-                                       ('TL', 'Time Limit Exceeded'),
                                        ('RE', 'Runtime Error')),
                               default='SU',
                               db_index=True)
