@@ -22,7 +22,7 @@
     </thead>
     <tbody>
       <tr>
-        <td class="table-column-id"><a href="{% url 'judge:submission_detail' submission.pk %}">{{ submission.pk }}</a></td>
+        <td class="table-column-id">{{ submission.pk }}</td>
         <td class="table-column-problem"><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem.title }}</a></td>
         <td class="table-column-status">{{ submission.get_status_display }}</td>
         <td class="table-column-datetime">{{ submission.submission_datetime }}</td>

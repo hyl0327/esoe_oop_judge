@@ -52,6 +52,7 @@
     <thead>
       <tr>
         <th class="table-column-id">ID</th>
+        <th class="table-column-problem">Problem</th>
         <th class="table-column-status">Status</th>
         <th class="table-column-datetime">Datetime</th>
       </tr>
@@ -60,6 +61,7 @@
       {% for submission in profile_submission_list %}
       <tr>
         <td class="table-column-id"><a href="{% url 'judge:submission_detail' submission.pk %}">{{ submission.pk }}</a></td>
+        <td class="table-column-problem">{{ submission.problem.title }}</td>
         <td class="table-column-status">{{ submission.get_status_display }}</td>
         <td class="table-column-datetime">{{ submission.submission_datetime }}</td>
       </tr>
