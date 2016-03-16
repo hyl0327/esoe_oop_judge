@@ -4,9 +4,6 @@ from django.core.validators import validate_slug
 from django.contrib.auth.models import User
 
 class Problem(models.Model):
-    # is it a sample problem?
-    is_sample = models.BooleanField()
-
     title = models.CharField(max_length=32)
     description = models.TextField()
     input_format = models.TextField()
@@ -17,8 +14,7 @@ class Problem(models.Model):
     deadline_datetime = models.DateTimeField()
 
     def __str__(self):
-        return '{}{}'.format('(Sample) ' if self.is_sample else '',
-                             self.title)
+        return '{}'.format(self.title)
 
     class Meta:
         ordering = ['pk']
