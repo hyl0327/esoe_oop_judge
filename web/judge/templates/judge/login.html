@@ -8,28 +8,31 @@
 {% endblock %}
 
 {% block content %}
-<div id="content_div">
-  <h1>ESOE OOP Judge</h1>
+<h1 class="text-center">ESOE OOP Judge</h1>
 
-  <form method="post" action="{% url 'judge:login' %}">
-    {% csrf_token %}
+<form method="post" action="{% url 'judge:login' %}" class="center-block">
+  {% csrf_token %}
 
-    <p>{{ form.non_field_errors }}</p>
-    <div id="login_div">
-      {% for field in form %}
-      <div id="sub_login_div">
-        {{ field.errors }}
-        <p>
-          <label for="{{ field.id_for_label }}" class="login_label">{{ field.label }}</label>
-          {{ field|add_class:'login_field' }}
-        </p>
-      </div>
-      {% endfor %}
-
-      <input type="hidden" name="next" value="{{ next }}">
-
-      <input type="submit" value="Login" id="submit_btn">
+  {{ form.non_field_errors }}
+  <div class="form-group{% if form.non_field_errors or form.username.errors %} has-error{% endif %}">
+    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+    <div class="inner-addon left-addon">
+      <span class="glyphicon glyphicon-user"></span>
+      {% render_field form.username placeholder=form.username.label autofocus='' class+='form-control' %}
     </div>
-  </form>
-</div>
+    {{ form.username.errors }}
+  </div>
+  <div class="form-group{% if form.non_field_errors or form.password.errors %} has-error{% endif %}">
+    <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+    <div class="inner-addon left-addon">
+      <span class="glyphicon glyphicon-lock"></span>
+      {% render_field form.password placeholder=form.password.label class+='form-control' %}
+    </div>
+    {{ form.password.errors }}
+  </div>
+
+  <input type="hidden" name="next" value="{{ next }}">
+
+  <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+</form>
 {% endblock %}

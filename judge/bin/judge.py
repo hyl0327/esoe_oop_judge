@@ -68,17 +68,16 @@ def get_submitted_files():
             if e.returncode == 22:
                 submission.status = 'SE'
                 submission.detailed_messages = (
-                    '<code>{0}</code> was not found at'
-                    ' <a href="{1}" target="_blank">{1}</a>.\n\n'
+                    '<code>{0}</code> was not found at <code>{1}/{0}</code> in'
+                    ' your repository.\n\n'
                     'Please make sure you have correctly set up the Bitbucket'
-                    ' settings in the profile page and that the file actually'
-                    ' exists. Also, please make sure that you have made the'
-                    ' repository accessible to the judge\'s Bitbucket'
-                    ' account.\n\n'
+                    ' settings in your profile, made the repository accessible'
+                    ' to the judge\'s Bitbucket account, and that the file'
+                    ' actually exists.\n\n'
                     'For details, please refer to the guidelines on the home'
                     ' page.'
                 ).format(filename,
-                         bitbucket_url)
+                         problem.pk)
             elif e.returncode == 63:
                 submission.status = 'SE'
                 submission.detailed_messages = (

@@ -13,6 +13,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 import config
 
+from django.contrib.messages import constants as messages
+
 
 # Web base directory
 
@@ -144,6 +146,14 @@ STATIC_ROOT = os.path.join(config.WEB_DIR, 'static')
 
 # include the static directory of judge
 STATICFILES_DIRS = [config.JUDGE_STATIC_DIR]
+
+
+# Messages
+
+MESSAGE_TAGS = {
+    messages.SUCCESS: 'alert-success',
+    messages.ERROR: 'alert-danger',
+}
 
 
 # User authentication

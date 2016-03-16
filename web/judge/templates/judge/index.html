@@ -7,54 +7,58 @@
 {% endblock %}
 
 {% block content %}
-<div id="index_div">
+<div id="guidelines">
   <h2>How to submit?</h2>
   <ol>
     <li>
       Register an account at
-      <a href="https://bitbucket.org/" target="_blank">Bitbucket</a> with your
+      <a target="_blank" href="https://bitbucket.org/">Bitbucket</a> with your
       NTU Mail to get an academic plan.
     </li>
     <li>
-      Create a new PRIVATE repository for this course.
+      Create a new <mark>PRIVATE</mark> repository for this course.
     </li>
     <li>
-      Share the repository to the account
-      <code>{{ bitbucket_account }}</code> (only READ access permission is
-      needed).
+      Share the repository (only reading permission is needed) to the account
+      <code>{{ bitbucket_account }}</code>.
     </li>
     <li>
-      Set up the Bitbucket settings in your profile.
+      Set up the Bitbucket settings in
+      <a href="{% url 'judge:profile' %}">your profile</a>.
     </li>
     <li>
-      Clone the repository into your workspace (<code>git clone</code>).
+      Clone the repository into whatever place you like
+      (<code>git clone</code>).
     </li>
     <li>
       In the directory you just cloned, create a directory named
-      <code>{{ sample_problem.pk }}</code>
-      (<code>mkdir {{ sample_problem.pk }}</code>).
+      <code>{{ sample_problem.pk }}</code>, which is the problem ID of
+      <a href={% url 'judge:problem_detail' pk=sample_problem.pk %}>{{ sample_problem.title }}</a>.
     </li>
     <li>
-      Add the required submitted files (with your solutions, of course)
-      specified in
-      <a href={% url 'judge:problem_detail' pk=sample_problem.pk %}>{{ sample_problem }}</a>
-      to <code>{{ sample_problem.pk }}</code>.
+      Add the required <mark>SUBMITTED</mark> files (with your solutions, of
+      course) specified in
+      <a href={% url 'judge:problem_detail' pk=sample_problem.pk %}>{{ sample_problem.title }}</a>
+      into <code>{{ sample_problem.pk }}</code>.
     </li>
     <li>
       Commit and push
       (<code>git add</code>, <code>git commit</code>, and then <code>git push</code>).
     </li>
     <li>
-      Click the submit button in the problem detail page.
+      Click the submit button in
+      <a href={% url 'judge:problem_detail' pk=sample_problem.pk %}>{{ sample_problem.title }}</a>.
     </li>
     <li>
-      See if there are any errors; if so, then go back to debug and submit again
-      when you have done debugging.
-    </li>
-    <li>
-      Do not forget to change <code>{{ sample_problem.pk }}</code> to the
-      corresponding problem ID when you are solving other problems.
+      See if there are any errors; if so, then go back to debug and try it again
+      when you are done.
     </li>
   </ol>
+  <div class="alert alert-warning">
+    Here, we use
+    <a href={% url 'judge:problem_detail' pk=sample_problem.pk %}>{{ sample_problem.title }}</a>
+    as sample. Do not forget to make corresponding changes when you are solving
+    other problems.
+  </div>
 </div>
 {% endblock %}

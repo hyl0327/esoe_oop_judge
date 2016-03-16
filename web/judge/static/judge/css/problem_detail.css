@@ -1,139 +1,39 @@
-h2 {
-    text-align: center;
-}
-
-#detail_div, #submissions_div {
-    width: 80%;
-    margin: 0 auto;
-}
-
-.problem_div {
-    margin-top: 30px;
-}
-
-.problem_div p {
-    margin-bottom: 20px;
-}
-
-.problem_div h3, #submissions_div h3 {
-    color: #53829E;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.problem_div ul {
-    /* In Required_files' div */
-    border: 1px solid #C0C0C0;
-    border-radius: 3px;
-    margin: 15px 0px;
+pre {
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-.problem_div ul li {
-    padding: 2px 0px;
-}
-
-#required_files_btn {
-    width: auto;
-    font-size: 20px;
-    padding: 10px 15px;
+#required-files {
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #c0c0c0;
     border-radius: 5px;
-    text-transform: uppercase;
-    background: #53829E;
-    color: #FFFFFF;
-    border: none;
+}
+#required-files ul {
+    margin-bottom: 0;
+    padding-left: 20px;
+}
+#required-files ul li {
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 
-.sample_io {
-    border: 1px solid #C0C0C0;
-    background: #E4E4E4;
-    border-radius: 5px;
-    font-family: monospace, Consolas;
+form button {
+    margin-top: 15px;
 }
 
-.sample_io p {
-    margin: 15px;
-}
-
-#submissions_div {
-    margin-top: 50px;
-}
-
-#submissions_div table {
+.table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    font-size: 20px;
 }
-
-#submissions_div table thead {
-    background: #53829E;
-}
-
-#submissions_div table thead tr:first-child th:first-child {
-    border-top-left-radius: 10px;
-}
-
-#submissions_div table thead tr:first-child th:last-child {
-    border-top-right-radius: 10px;
-}
-
-#submissions_div table tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 10px;
-}
-
-#submissions_div table tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 10px;
-}
-
-#submissions_div table tbody tr td:first-child {
-    border-left: 1px solid #53829E;
-}
-
-#submissions_div table tbody tr td:last-child {
-    border-right: 1px solid #53829E;
-}
-
-#submissions_div table tbody tr:last-child td {
-    border-bottom: 1px solid #53829E;
-}
-
-tr > th {
-    padding: 10px;
-    text-align: center;
-    font-family: sans-serif, "Open Sans";
-    color: #FFFFFF;
-}
-
-tr > td {
-    padding: 10px;
-    text-align: center;
-    font-family: sans-serif, "Open Sans";
-    font-weight: lighter;
-}
-
-td > a {
-    text-decoration: none;
-    color: #20a7ba;
-}
-
-td > a:hover {
-    text-decoration: none;
-}
-
-.submissions_id {
-    width: 20%;
+.table .table-column-id {
+    width: 15%;
     text-align: center;
 }
-
-.submissions_status {
-    width: 50%;
-    padding-right: 30px;
+.table .table-column-status {
+    width: 55%;
     text-align: center;
 }
-
-.submissions_datetime {
+.table .table-column-datetime {
     width: 30%;
     text-align: center;
 }

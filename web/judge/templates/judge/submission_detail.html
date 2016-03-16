@@ -3,38 +3,38 @@
 {% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'judge/css/submissions_detail.css' %}">
+<link rel="stylesheet" href="{% static 'judge/css/submission_detail.css' %}">
 {% endblock %}
 
 {% block content %}
-<div id="content_div">
-  <h2>Submission #{{ submission.pk }}</h2>
+<h2 class="text-center">Submission #{{ submission.pk }}</h2>
 
-  <h3>Basic Information</h3>
-  <table id="submissions_table">
+<h3>Basic Information</h3>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th class="submissions_id">ID</th>
-        <th class="submissions_problem">Problem</th>
-        <th class="submissions_status">Status</th>
-        <th class="submissions_datetime">Datetime</th>
+        <th class="table-column-id">ID</th>
+        <th class="table-column-problem">Problem</th>
+        <th class="table-column-status">Status</th>
+        <th class="table-column-datetime">Datetime</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>{{ submission.pk }}</td>
-        <td><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem }}</a></td>
-        <td>{{ submission.get_status_display }}</td>
-        <td>{{ submission.submission_datetime }}</td>
+        <td class="table-column-id"><a href="{% url 'judge:submission_detail' submission.pk %}">{{ submission.pk }}</a></td>
+        <td class="table-column-problem"><a href="{% url 'judge:problem_detail' submission.problem.pk %}">{{ submission.problem.title }}</a></td>
+        <td class="table-column-status">{{ submission.get_status_display }}</td>
+        <td class="table-column-datetime">{{ submission.submission_datetime }}</td>
       </tr>
     </tbody>
   </table>
-
-  {% if submission.detailed_messages %}
-  <h3>Detailed Messages</h3>
-  <div id="detailed_messages_div">
-    {{ submission.detailed_messages|safe|linebreaks }}
-  </div>
-  {% endif %}
 </div>
+
+{% if submission.detailed_messages %}
+<h3>Detailed Messages</h3>
+<div id="detailed-messages">
+  {{ submission.detailed_messages|safe|linebreaks }}
+</div>
+{% endif %}
 {% endblock %}

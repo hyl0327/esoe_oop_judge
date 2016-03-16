@@ -85,7 +85,7 @@ def problem_detail(request, pk):
                               str(submission.pk)],
                              cwd=config.JUDGE_BIN_DIR)
 
-            messages.success(request, 'Submitting.')
+            messages.success(request, 'Submitting. Refresh to see the results.')
         return HttpResponseRedirect(reverse('judge:problem_detail', kwargs={'pk': pk}))
 
     profile_submission_list = problem.submission_set.filter(profile=profile)

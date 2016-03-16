@@ -1,11 +1,3 @@
-h2 {
-    margin-bottom: 30px;
-}
-
-form button {
-    margin-top: 5px;
-}
-
 .table {
     width: 100%;
 }
@@ -24,4 +16,11 @@ form button {
 .table .table-column-datetime {
     width: 25%;
     text-align: center;
+}
+
+#detailed-messages {
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
 }

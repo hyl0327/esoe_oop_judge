@@ -1,21 +1,19 @@
-#index_div {
-    box-shadow: 5px 5px 20px #53829E;
+#guidelines {
+    padding: 20px 25px;
+    box-shadow: 5px 5px 20px #53829e;
     border-radius: 10px;
-    width: 80%;
-    margin: 0 auto;
-    padding: 8px;
 }
-
-#index_div h2 {
-    margin-left: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+#guidelines ol {
+    margin-bottom: 0;
+    padding-left: 35px;
 }
-
-#index_div ol {
-    padding-bottom: 15px;
+#guidelines ol li {
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
-
-#index_div ol li {
-    padding: 2px;
+#guidelines .alert {
+    margin-top: 15px;
+    margin-bottom: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }

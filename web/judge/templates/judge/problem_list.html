@@ -4,34 +4,32 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'judge/css/problem_list.css' %}">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 {% endblock %}
 
 {% block content %}
-<div id="problem_list_div">
-  <table>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th class="problem_id">ID</th>
-        <th class="problem_title">Title</th>
-        <th class="problem_solved">Solved</th>
-        <th class="problem_deadline_datetime">Deadline</th>
+        <th class="table-column-id">ID</th>
+        <th class="table-column-title">Title</th>
+        <th class="table-column-solved">Solved</th>
+        <th class="table-column-deadline">Deadline</th>
       </tr>
     </thead>
     <tbody>
       {% for problem, profile_solved in problem_profile_solved_list %}
       <tr>
-        <td class="problem_id">{{ problem.pk }}</td>
-        <td class="problem_title"><a href="{% url 'judge:problem_detail' problem.pk %}">{{ problem }}</a></td>
-        <td class="problem_solved">
-          {# {{ profile_solved|yesno:'Yes,No' }} #}
+        <td class="table-column-id">{{ problem.pk }}</td>
+        <td class="table-column-title"><a href="{% url 'judge:problem_detail' problem.pk %}">{{ problem.title }}</a></td>
+        <td class="table-column-solved">
           {% if profile_solved %}
-          <span class="glyphicon glyphicon-ok" style="color:green"></span>
+          <span class="glyphicon glyphicon-ok text-success"></span>
           {% else %}
-          <span class="glyphicon glyphicon-remove" style="color:red"></span>
+          <span class="glyphicon glyphicon-remove text-danger"></span>
           {% endif %}
         </td>
-        <td class="problem_deadline_datetime">{{ problem.deadline_datetime }}</td>
+        <td class="table-column-deadline">{{ problem.deadline_datetime }}</td>
       </tr>
       {% endfor %}
     </tbody>

@@ -1,95 +1,19 @@
-#problem_list_div {
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 100px;
-}
-
-#problem_list_div table {
+.table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    font-size: 20px;
+    margin-bottom: 30px;
 }
-
-#problem_list_div table thead {
-    background: #53829E;
-    color: #FFFFFF;
-}
-
-#problem_list_div table thead tr:first-child th:first-child {
-    border-top-left-radius: 10px;
-}
-
-#problem_list_div table thead tr:first-child th:last-child {
-    border-top-right-radius: 10px;
-}
-
-#problem_list_div table tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 10px;
-}
-
-#problem_list_div table tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 10px;
-}
-
-#problem_list_div table tbody tr td:first-child {
-    border-left: 1px solid #53829E;
-}
-
-#problem_list_div table tbody tr td:last-child {
-    border-right: 1px solid #53829E;
-}
-
-#problem_list_div table tbody tr:last-child td {
-    border-bottom: 1px solid #53829E;
-}
-
-tr > th {
-    padding: 10px;
-}
-
-tr > td {
-    padding: 10px;
-    font-family: sans-serif, "Open Sans";
-}
-
-td > a {
-    text-decoration: none;
-    color: #20a7ba;
-}
-
-tbody > tr:nth-child(even) {
-    background: #F5F5F5;
-}
-
-tbody > tr:hover {
-    background: #B0C4DE;
-    color: #FFFFFF;
-
-}
-
-tbody > tr:hover a {
-    background: #B0C4DE;
-    color: #FFFFFF;
-    text-decoration: none;
-}
-
-.problem_id {
+.table .table-column-id {
     width: 10%;
     text-align: center;
 }
-
-.problem_title {
-    width: 60%;
-    text-align: left;
+.table .table-column-title {
+    width: 55%;
 }
-.problem_solved {
+.table .table-column-solved {
     width: 10%;
-    padding-right: 30px;
     text-align: center;
 }
-
-.problem_deadline_datetime {
-    width: 20%;
+.table .table-column-deadline {
+    width: 25%;
     text-align: center;
 }
