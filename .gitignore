@@ -79,7 +79,6 @@ judge/static/problems/*
 !judge/static/problems/.keep
 
 # Web related files
-web/static/*
-!web/static/.keep
-!web/static/robots.txt
-!web/static/favicon.ico
+web/mod_wsgi-express-*/
+web/htdocs/static/*
+!web/htdocs/static/.keep

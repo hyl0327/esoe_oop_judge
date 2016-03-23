@@ -22,6 +22,7 @@ JUDGE_STATIC_PROBLEMS_DIR = os.path.join(JUDGE_STATIC_DIR, 'problems')
 JUDGE_SUBMISSIONS_DIR = os.path.join(JUDGE_DIR, 'submissions')
 
 WEB_DIR = os.path.join(ROOT_DIR, 'web')
+WEB_HTDOCS_DIR = os.path.join(WEB_DIR, 'htdocs')
 
 
 # Judge related settings
