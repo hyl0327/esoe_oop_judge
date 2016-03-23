@@ -14,7 +14,10 @@ class Problem(models.Model):
     deadline_datetime = models.DateTimeField()
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return '[#{}] {}'.format(
+            self.pk,
+            self.title
+        )
 
     class Meta:
         ordering = ['pk']
@@ -28,14 +31,20 @@ class RequiredFile(models.Model):
                                     ('P', 'Provided')))
 
     def __str__(self):
-        return '{} (Problem={})'.format(self.filename,
-                                        str(self.problem))
+        return '[#{}] [Problem={{ {} }}] {} ({})'.format(
+            self.pk,
+            str(self.problem),
+            self.filename,
+            self.get_via_display()
+        )
 
     class Meta:
         ordering = ['problem__pk', 'via', 'filename']
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+    name = models.CharField(max_length=32)
 
     # Bitbucket settings
     bitbucket_account = models.CharField(max_length=32,
@@ -46,8 +55,11 @@ class Profile(models.Model):
                                             validators=[validate_slug])
 
     def __str__(self):
-        return '#{} (User={})'.format(self.pk,
-                                      str(self.user))
+        return '[#{}] [User={{ {} }}] {}'.format(
+            self.pk,
+            self.user,
+            self.name
+        )
 
     class Meta:
         ordering = ['user__username']
@@ -72,9 +84,11 @@ class Submission(models.Model):
     detailed_messages = models.TextField(blank=True)
 
     def __str__(self):
-        return '#{} (Problem={}, Profile={})'.format(self.pk,
-                                                     str(self.problem),
-                                                     str(self.profile))
+        return '[#{}] [Problem={{ {} }}, Profile={{ {} }}]'.format(
+            self.pk,
+            str(self.problem),
+            str(self.profile)
+        )
 
     class Meta:
         ordering = ['-pk']
