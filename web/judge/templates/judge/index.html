@@ -16,7 +16,7 @@
       NTU Mail to get an academic plan.
     </li>
     <li>
-      Create a new <mark>PRIVATE</mark> repository for this course.
+      Create a new private repository for this course.
     </li>
     <li>
       Share the repository (only reading permission is needed) to the account
@@ -31,15 +31,15 @@
       (<code>git clone</code>).
     </li>
     <li>
-      In the directory you just cloned, create a directory named
+      In the directory you just cloned, create another directory named
       <code>{{ sample_problem.pk }}</code>, which is the problem ID of
       <a href={% url 'judge:problem_detail' pk=sample_problem.pk %}>{{ sample_problem.title }}</a>.
     </li>
     <li>
-      Add the required <mark>SUBMITTED</mark> files (with your solutions, of
-      course) specified in
+      Add all required files marked submitted in
       <a href={% url 'judge:problem_detail' pk=sample_problem.pk %}>{{ sample_problem.title }}</a>
-      into <code>{{ sample_problem.pk }}</code>.
+      into <code>{{ sample_problem.pk }}</code> (with your solutions included,
+      of course).
     </li>
     <li>
       Commit and push
