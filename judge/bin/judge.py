@@ -103,9 +103,11 @@ def compile():
     problem_id_dir = os.path.join(config.JUDGE_PROBLEMS_DIR, str(problem.pk))
     problem_id_provided_dir = os.path.join(config.JUDGE_STATIC_PROBLEMS_DIR, str(problem.pk))
     provided_filenames = [f.filename for f in problem.requiredfile_set.filter(via='P')]
-    shutil.copy(os.path.join(problem_id_dir, 'Main.java'), '.')
+    shutil.copyfile(os.path.join(problem_id_dir, 'Main.java'),
+                    os.path.join(os.getcwd(), 'Main.java'))
     for filename in provided_filenames:
-        shutil.copy(os.path.join(problem_id_provided_dir, filename), '.')
+        shutil.copyfile(os.path.join(problem_id_provided_dir, filename),
+                        os.path.join(os.getcwd(), filename))
 
     # compile
     cmd = (
