@@ -26,16 +26,16 @@
 {{ problem.output_format|linebreaks }}
 
 <h3>Sample Input</h3>
-<pre>{{ problem.sample_input|linebreaksbr }}</pre>
+<pre><code>{{ problem.sample_input }}</code></pre>
 
 <h3>Sample Output</h3>
-<pre>{{ problem.sample_output|linebreaksbr }}</pre>
+<pre><code>{{ problem.sample_output }}</code></pre>
 
 <h3>Required Files</h3>
 <div id="required-files">
   <ul>
     {% for requiredfile in problem.requiredfile_set.all %}
-    <li><code>{{ requiredfile.filename }}</code> ({{ requiredfile.get_via_display }})</li>
+    <li><tt>{{ requiredfile.filename }}</tt> ({{ requiredfile.get_via_display }})</li>
     {% endfor %}
   </ul>
 </div>

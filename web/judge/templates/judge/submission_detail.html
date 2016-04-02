@@ -3,7 +3,15 @@
 {% load staticfiles %}
 
 {% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeEclipse.min.css">
 <link rel="stylesheet" href="{% static 'judge/css/submission_detail.css' %}">
+{% endblock %}
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJava.min.js"></script>
+<script>SyntaxHighlighter.all()</script>
 {% endblock %}
 
 {% block content %}
@@ -35,6 +43,25 @@
 <h3>Detailed Messages</h3>
 <div id="detailed-messages">
   {{ submission.detailed_messages|safe|linebreaks }}
+  {% if submission.detailed_messages_stderr %}
+  <pre><code>{{ submission.detailed_messages_stderr }}</code></pre>
+  {% endif %}
+</div>
+{% endif %}
+
+{% if submitted_files %}
+<h3>Submitted Files</h3>
+<div id="submitted-files">
+  <div class="panel panel-info">
+    {% for file in submitted_files %}
+    <div class="panel-heading">
+      <tt class="panel-title">{{ file.filename }}</tt>
+    </div>
+    <div class="panel-body">
+      <pre class="brush: java">{{ file.content }}</pre>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endif %}
 {% endblock %}

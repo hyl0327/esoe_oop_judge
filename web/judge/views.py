@@ -169,6 +169,19 @@ def submission_detail(request, pk):
                        'Permission denied.')
         return HttpResponseRedirect(reverse('judge:index'))
 
+    # display submitted files (only when status != 'SU' and status != 'SE')
+    class SubmittedFile:
+        def __init__(self, filename, content):
+            self.filename = filename
+            self.content = content
+    submitted_files = []
+    if submission.status != 'SU' and submission.status != 'SE':
+        submitted_filenames = [f.filename for f in submission.problem.requiredfile_set.filter(via='S')]
+        for filename in submitted_filenames:
+            with open(os.path.join(config.JUDGE_SUBMISSIONS_DIR, str(submission.pk), filename)) as f:
+                submitted_files.append(SubmittedFile(filename, f.read()))
+
     return render(request,
                   'judge/submission_detail.html',
-                  {'submission': submission})
+                  {'submission': submission,
+                   'submitted_files': submitted_files})

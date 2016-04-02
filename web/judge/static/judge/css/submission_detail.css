@@ -24,3 +24,8 @@
     border: 1px solid #c0c0c0;
     border-radius: 4px;
 }
+
+#submitted-files .panel .panel-body {
+    padding-top: 0;
+    padding-bottom: 0;
+}

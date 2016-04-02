@@ -82,6 +82,7 @@ class Submission(models.Model):
     submission_datetime = models.DateTimeField()
 
     detailed_messages = models.TextField(blank=True)
+    detailed_messages_stderr = models.TextField(blank=True)
 
     def __str__(self):
         return '[#{}] [Problem={{ {} }}, Profile={{ {} }}]'.format(

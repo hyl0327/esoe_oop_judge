@@ -89,10 +89,9 @@ def get_submitted_files():
                 submission.status = 'SE'
                 submission.detailed_messages = (
                     'The following errors occurred during the submission of'
-                    ' <code>{}</code>:\n\n'
-                    '<pre>{}</pre>'
-                ).format(filename,
-                         e.stderr)
+                    ' <code>{}</code>:'
+                ).format(filename)
+                submission.detailed_messages_stderr = e.stderr
             submission.save()
             sys.exit(1)
 
@@ -130,9 +129,9 @@ def compile():
     except subprocess.CalledProcessError as e:
         submission.status = 'CE'
         submission.detailed_messages = (
-            'The following errors occurred during compilation:\n\n'
-            '<pre>{}</pre>'
-        ).format(e.stderr)
+            'The following errors occurred during compilation:'
+        )
+        submission.detailed_messages_stderr = e.stderr
         submission.save()
         sys.exit(1)
 
@@ -184,9 +183,9 @@ def execute():
     except subprocess.CalledProcessError as e:
         submission.status = 'RE'
         submission.detailed_messages = (
-            'The following errors occurred during execution:\n\n'
-            '<pre>{}</pre>'
-        ).format(e.stderr)
+            'The following errors occurred during execution:'
+        )
+        submission.detailed_messages_stderr = e.stderr
         submission.save()
         sys.exit(1)
 

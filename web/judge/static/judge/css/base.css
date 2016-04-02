@@ -135,6 +135,11 @@ p {
     margin-bottom: 10px;
 }
 
+tt {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 90%;
+}
+
 a:link {
     text-decoration: none;
 }
