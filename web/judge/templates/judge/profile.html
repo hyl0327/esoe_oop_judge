@@ -17,19 +17,23 @@
   {{ update_bitbucket_form.non_field_errors }}
   <div class="row">
     <div class="form-group{% if update_bitbucket_form.non_field_errors or update_bitbucket_form.bitbucket_account.errors %} has-error{% endif %} col-sm-6">
-      <label for="{{ update_bitbucket_form.bitbucket_account.id_for_label }}">{{ update_bitbucket_form.bitbucket_account.label }} (in lower case)</label>
+      {% with update_bitbucket_form.bitbucket_account.label|add:' (in lower case)' as label %}
+      <label for="{{ update_bitbucket_form.bitbucket_account.id_for_label }}">{{ label }}</label>
       <div class="inner-addon left-addon">
         <span class="fa fa-bitbucket"></span>
-        {% render_field update_bitbucket_form.bitbucket_account placeholder=update_bitbucket_form.bitbucket_account.label class+='form-control' %}
+        {% render_field update_bitbucket_form.bitbucket_account placeholder=label class+='form-control' %}
       </div>
+      {% endwith %}
       {{ update_bitbucket_form.bitbucket_account.errors }}
     </div>
     <div class="form-group{% if update_bitbucket_form.non_field_errors or update_bitbucket_form.bitbucket_repository.errors %} has-error{% endif %} col-sm-6">
-      <label for="{{ update_bitbucket_form.bitbucket_repository.id_for_label }}">{{ update_bitbucket_form.bitbucket_repository.label }} (in lower case)</label>
+      {% with update_bitbucket_form.bitbucket_repository.label|add:' (in lower case)' as label %}
+      <label for="{{ update_bitbucket_form.bitbucket_repository.id_for_label }}">{{ label }}</label>
       <div class="inner-addon left-addon">
         <span class="fa fa-bitbucket"></span>
-        {% render_field update_bitbucket_form.bitbucket_repository placeholder=update_bitbucket_form.bitbucket_repository.label class+='form-control' %}
+        {% render_field update_bitbucket_form.bitbucket_repository placeholder=label class+='form-control' %}
       </div>
+      {% endwith %}
       {{ update_bitbucket_form.bitbucket_repository.errors }}
     </div>
   </div>

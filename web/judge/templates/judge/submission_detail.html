@@ -11,7 +11,10 @@
 {% block js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJava.min.js"></script>
-<script>SyntaxHighlighter.all()</script>
+<script>
+  SyntaxHighlighter.defaults.toolbar = false;
+  SyntaxHighlighter.all();
+</script>
 {% endblock %}
 
 {% block content %}
