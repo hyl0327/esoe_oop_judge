@@ -36,26 +36,26 @@ JUDGE_EXECUTION_TIMEOUT = 10             # in seconds
 
 
 # Web related settings
-WEB_SECRET_KEY = '^1&vzcf@^j8&lyaxs1hus6k69=aw4$x*#&794g&abj)=be6(gr'
+WEB_SECRET_KEY = ''
 
-WEB_ALLOWED_HOSTS = ['oopjudge.cklab.org']
+WEB_ALLOWED_HOSTS = []
 
 WEB_INDEX_SAMPLE_PROBLEM_ID = 1
 
 
 # DB related settings
-DB_NAME = 'esoe_oop_judge'
-DB_USER = 'esoe_oop_judge'
-DB_PASSWORD = 'zxt5t5NuT4HETiKl'
+DB_NAME = ''
+DB_USER = ''
+DB_PASSWORD = ''
 
 
 # Account settings
-EMAIL = 'esoe.oop.judge@gmail.com'
-EMAIL_PASSWORD = 'qfTurFvx6u1ZV997H6gZ'
+EMAIL = ''
+EMAIL_PASSWORD = ''
 
-BITBUCKET_EMAIL = 'esoe.oop.judge@gmail.com'
-BITBUCKET_ACCOUNT = 'esoe_oop_judge'
-BITBUCKET_PASSWORD = 'qfTurFvx6u1ZV997H6gZ'
+BITBUCKET_EMAIL = ''
+BITBUCKET_ACCOUNT = ''
+BITBUCKET_PASSWORD = ''
 
 
 # Utility functions
