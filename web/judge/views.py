@@ -49,22 +49,24 @@ def logout(request):
 def problem_list(request):
     profile = request.user.profile
 
-    problem_list = Problem.objects.all()
-    profile_solved_list = []
-    for problem in problem_list:
-        profile_submission_list = problem.submission_set.filter(profile=profile)
-        profile_solved = profile_submission_list.filter(status='AC').exists()
-        profile_solved_list.append(profile_solved)
-    problem_profile_solved_list = zip(problem_list, profile_solved_list)
+    problem_info_list = []
+    for problem in Problem.objects.all():
+        profile_solved = problem.submission_set.filter(profile=profile, status='AC').exists()
+        problem_info_list.append({
+            'problem': problem,
+            'profile_solved': profile_solved
+        })
 
     return render(request,
                   'judge/problem_list.html',
-                  {'problem_profile_solved_list': problem_profile_solved_list})
+                  {'problem_info_list': problem_info_list})
 
 def problem_detail(request, pk):
     profile = request.user.profile
 
     problem = get_object_or_404(Problem, pk=pk)
+    profile_submission_list = problem.submission_set.filter(profile=profile)
+    profile_solved = profile_submission_list.filter(status='AC').exists()
 
     # handle submission
     if request.method == 'POST':
@@ -87,9 +89,6 @@ def problem_detail(request, pk):
 
             messages.success(request, 'Submitting. Refresh to see the results.')
         return HttpResponseRedirect(reverse('judge:problem_detail', kwargs={'pk': pk}))
-
-    profile_submission_list = problem.submission_set.filter(profile=profile)
-    profile_solved = profile_submission_list.filter(status='AC').exists()
 
     return render(request,
                   'judge/problem_detail.html',
@@ -170,18 +169,17 @@ def submission_detail(request, pk):
         return HttpResponseRedirect(reverse('judge:index'))
 
     # display submitted files (only when status != 'SU' and status != 'SE')
-    class SubmittedFile:
-        def __init__(self, filename, content):
-            self.filename = filename
-            self.content = content
-    submitted_files = []
+    submitted_file_info_list = []
     if submission.status != 'SU' and submission.status != 'SE':
         submitted_filenames = [f.filename for f in submission.problem.requiredfile_set.filter(via='S')]
         for filename in submitted_filenames:
             with open(os.path.join(config.JUDGE_SUBMISSIONS_DIR, str(submission.pk), filename)) as f:
-                submitted_files.append(SubmittedFile(filename, f.read()))
+                submitted_file_info_list.append({
+                    'filename': filename,
+                    'content': f.read()
+                })
 
     return render(request,
                   'judge/submission_detail.html',
                   {'submission': submission,
-                   'submitted_files': submitted_files})
+                   'submitted_file_info_list': submitted_file_info_list})

@@ -18,18 +18,18 @@
       </tr>
     </thead>
     <tbody>
-      {% for problem, profile_solved in problem_profile_solved_list %}
+      {% for problem_info in problem_info_list %}
       <tr>
-        <td class="table-column-id">{{ problem.pk }}</td>
-        <td class="table-column-title"><a href="{% url 'judge:problem_detail' problem.pk %}">{{ problem.title }}</a></td>
+        <td class="table-column-id">{{ problem_info.problem.pk }}</td>
+        <td class="table-column-title"><a href="{% url 'judge:problem_detail' problem_info.problem.pk %}">{{ problem_info.problem.title }}</a></td>
         <td class="table-column-solved">
-          {% if profile_solved %}
+          {% if problem_info.profile_solved %}
           <span class="glyphicon glyphicon-ok text-success"></span>
           {% else %}
           <span class="glyphicon glyphicon-remove text-danger"></span>
           {% endif %}
         </td>
-        <td class="table-column-deadline">{{ problem.deadline_datetime }}</td>
+        <td class="table-column-deadline">{{ problem_info.problem.deadline_datetime }}</td>
       </tr>
       {% endfor %}
     </tbody>

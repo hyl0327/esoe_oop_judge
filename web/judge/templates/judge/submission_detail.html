@@ -52,16 +52,16 @@
 </div>
 {% endif %}
 
-{% if submitted_files %}
+{% if submitted_file_info_list %}
 <h3>Submitted Files</h3>
 <div id="submitted-files">
   <div class="panel panel-info">
-    {% for file in submitted_files %}
+    {% for submitted_file_info in submitted_file_info_list %}
     <div class="panel-heading">
-      <tt class="panel-title">{{ file.filename }}</tt>
+      <tt class="panel-title">{{ submitted_file_info.filename }}</tt>
     </div>
     <div class="panel-body">
-      <pre class="brush: java">{{ file.content }}</pre>
+      <pre class="brush: java">{{ submitted_file_info.content }}</pre>
     </div>
     {% endfor %}
   </div>
