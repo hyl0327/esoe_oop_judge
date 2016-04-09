@@ -68,6 +68,22 @@ def problem_detail(request, pk):
     profile_submission_list = problem.submission_set.filter(profile=profile)
     profile_solved = profile_submission_list.filter(status='AC').exists()
 
+    submitted_file_info_list = []
+    for f in problem.requiredfile_set.filter(via='S'):
+        submitted_file_info_list.append({
+            'filename': f.filename
+        })
+    provided_file_info_list = []
+    for f in problem.requiredfile_set.filter(via='P'):
+        provided_file_info_list.append({
+            'filename': f.filename,
+            'static_path': os.path.join(
+                os.path.basename(config.JUDGE_STATIC_PROBLEMS_DIR),
+                str(problem.pk),
+                f.filename
+            )
+        })
+
     # handle submission
     if request.method == 'POST':
         now = timezone.now()
@@ -94,7 +110,9 @@ def problem_detail(request, pk):
                   'judge/problem_detail.html',
                   {'problem': problem,
                    'profile_submission_list': profile_submission_list,
-                   'profile_solved': profile_solved})
+                   'profile_solved': profile_solved,
+                   'submitted_file_info_list': submitted_file_info_list,
+                   'provided_file_info_list': provided_file_info_list})
 
 def profile(request):
     user = request.user

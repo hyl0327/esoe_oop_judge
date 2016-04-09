@@ -34,8 +34,11 @@
 <h3>Required Files</h3>
 <div id="required-files">
   <ul>
-    {% for requiredfile in problem.requiredfile_set.all %}
-    <li><tt>{{ requiredfile.filename }}</tt> ({{ requiredfile.get_via_display }})</li>
+    {% for submitted_file_info in submitted_file_info_list %}
+    <li><tt>{{ submitted_file_info.filename }}</tt> (Submitted)</li>
+    {% endfor %}
+    {% for provided_file_info in provided_file_info_list %}
+    <li><a target="_blank" href="{% static provided_file_info.static_path %}"><tt>{{ provided_file_info.filename }}</tt></a> (Provided)</li>
     {% endfor %}
   </ul>
 </div>
