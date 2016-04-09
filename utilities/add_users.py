@@ -29,11 +29,10 @@ def main():
             user = User.objects.create_user(username=student_id,
                                             email=(student_id + '@ntu.edu.tw'),
                                             password=student_id)
-            user.first_name = name
             user.save()
 
             # create profile
-            profile = Profile(user=user)
+            profile = Profile(user=user, name=name)
             profile.save()
 
 if __name__ == '__main__':
