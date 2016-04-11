@@ -100,8 +100,7 @@ def problem_detail(request, pk):
             # judge (without waiting)
             subprocess.Popen([os.path.join(config.VIRTUALENV_BIN_DIR, 'python'),
                               os.path.join(config.JUDGE_BIN_DIR, 'judge.py'),
-                              str(submission.pk)],
-                             cwd=config.JUDGE_BIN_DIR)
+                              str(submission.pk)])
 
             messages.success(request, 'Submitting. Refresh to see the results.')
         return HttpResponseRedirect(reverse('judge:problem_detail', kwargs={'pk': pk}))
