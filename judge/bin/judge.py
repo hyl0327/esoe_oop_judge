@@ -207,7 +207,7 @@ def execute():
                            universal_newlines=True,
                            check=True)
     except subprocess.CalledProcessError as e:
-        submission.status = 'NA'
+        submission.status = 'WA'
         submission.save()
         sys.exit(1)
     submission.status = 'AC'
