@@ -75,7 +75,7 @@ class Submission(models.Model):
                                        ('CE', 'Compilation Error'),
                                        ('JU', 'Judging'),
                                        ('AC', 'Accepted'),
-                                       ('NA', 'Not Accepted'),
+                                       ('WA', 'Wrong Answer'),
                                        ('RE', 'Runtime Error')),
                               default='SU',
                               db_index=True)
