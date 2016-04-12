@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 from django.db.models import Max
 from django.contrib.auth.models import User
@@ -20,6 +21,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import PasswordChangeForm
 from .forms import ProfileUpdateBitbucketForm
 
+@login_required
 def index(request):
     sample_problem = Problem.objects.get(pk=config.WEB_INDEX_SAMPLE_PROBLEM_ID)
 
@@ -46,6 +48,7 @@ def logout(request):
     else:
         return auth_views.logout(request, next_page='judge:index')
 
+@login_required
 def problem_list(request):
     profile = request.user.profile
 
@@ -61,6 +64,7 @@ def problem_list(request):
                   'judge/problem_list.html',
                   {'problem_info_list': problem_info_list})
 
+@login_required
 def problem_detail(request, pk):
     profile = request.user.profile
 
@@ -113,6 +117,7 @@ def problem_detail(request, pk):
                    'submitted_file_info_list': submitted_file_info_list,
                    'provided_file_info_list': provided_file_info_list})
 
+@login_required
 def profile(request):
     user = request.user
     profile = user.profile
@@ -174,6 +179,7 @@ def profile(request):
                    'update_bitbucket_form': update_bitbucket_form,
                    'password_change_form': password_change_form})
 
+@login_required
 def submission_detail(request, pk):
     profile = request.user.profile
 
