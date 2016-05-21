@@ -7,38 +7,41 @@ class RequiredFileInline(admin.TabularInline):
 
 @admin.register(Problem)
 class ProblemAdmin(admin.ModelAdmin):
-    list_display = (
+    list_display = [
         'pk',
         'title',
         'deadline_datetime'
-    )
+    ]
     inlines = [
         RequiredFileInline
     ]
 
 @admin.register(RequiredFile)
 class RequiredFileAdmin(admin.ModelAdmin):
-    list_display = (
+    list_display = [
         'pk',
         'problem',
         'filename',
         'via'
-    )
+    ]
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = (
+    list_display = [
         'pk',
         'user',
         'name'
-    )
+    ]
+    filter_horizontal = [
+        'solved_problems'
+    ]
 
 @admin.register(Submission)
 class SubmissionAdmin(admin.ModelAdmin):
-    list_display = (
+    list_display = [
         'pk',
         'problem',
         'profile',
         'status',
         'submission_datetime'
-    )
+    ]

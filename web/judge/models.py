@@ -54,6 +54,10 @@ class Profile(models.Model):
                                             blank=True,
                                             validators=[validate_slug])
 
+    solved_problems = models.ManyToManyField(Problem,
+                                             related_name='solved_profiles',
+                                             blank=True)
+
     def __str__(self):
         return '[#{}] [User={{ {} }}] {}'.format(
             self.pk,
@@ -77,8 +81,7 @@ class Submission(models.Model):
                                        ('AC', 'Accepted'),
                                        ('WA', 'Wrong Answer'),
                                        ('RE', 'Runtime Error')),
-                              default='SU',
-                              db_index=True)
+                              default='SU')
     submission_datetime = models.DateTimeField()
 
     detailed_messages = models.TextField(blank=True)

@@ -212,6 +212,7 @@ def execute():
         sys.exit(1)
     submission.status = 'AC'
     submission.save()
+    profile.solved_problems.add(problem)
 
 def main():
     global submission, problem, profile

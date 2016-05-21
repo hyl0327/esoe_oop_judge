@@ -54,7 +54,7 @@ def problem_list(request):
 
     problem_info_list = []
     for problem in Problem.objects.all():
-        profile_solved = problem.submission_set.filter(profile=profile, status='AC').exists()
+        profile_solved = profile.solved_problems.filter(pk=problem.pk).exists()
         problem_info_list.append({
             'problem': problem,
             'profile_solved': profile_solved
@@ -70,7 +70,7 @@ def problem_detail(request, pk):
 
     problem = get_object_or_404(Problem, pk=pk)
     profile_submission_list = problem.submission_set.filter(profile=profile)
-    profile_solved = profile_submission_list.filter(status='AC').exists()
+    profile_solved = profile.solved_problems.filter(pk=problem.pk).exists()
 
     submitted_file_info_list = []
     for f in problem.requiredfile_set.filter(via='S'):
