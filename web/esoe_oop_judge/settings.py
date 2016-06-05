@@ -16,25 +16,21 @@ import config
 from django.contrib.messages import constants as messages
 
 
-# Web base directory
+# Django's own debug mode (here, we let it be the same as config.DEBUG)
+DEBUG = config.DEBUG
 
+
+# Web base directory
 BASE_DIR = config.WEB_DIR
 
 
 # Deployment
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config.DEBUG
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.WEB_SECRET_KEY
-
 ALLOWED_HOSTS = config.WEB_ALLOWED_HOSTS
 
 
-# Application definition
-
+# Application settings
 INSTALLED_APPS = [
     'judge.apps.JudgeConfig',
     'widget_tweaks',
@@ -78,14 +74,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'esoe_oop_judge.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
+# Database settings
+# See https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 if config.DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'NAME': os.path.join(config.WEB_DIR, 'db.sqlite3'),
         }
     }
 else:
@@ -101,7 +96,6 @@ else:
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -120,45 +114,31 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Taipei'
 
-# we intentionally disable internationalization/localization related settings in
-# order for users to see consistent contents from everywhere
+DATETIME_FORMAT='Y-m-d H:i:s'
+
 USE_I18N = False
 USE_L10N = False
-
-# we intentionally disable timezone support in order for users to see consistent
-# datetime information from everywhere
 USE_TZ = False
-
-# YYYY-MM-DD HH:MM:SS
-DATETIME_FORMAT='Y-m-d H:i:s'
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(config.WEB_HTDOCS_DIR, 'static')
 
-# include the static directory of judge
 STATICFILES_DIRS = [config.JUDGE_STATIC_DIR]
 
 
-# Messages
+# Miscellaneous settings
+LOGIN_URL = 'judge:login'
+LOGIN_REDIRECT_URL = 'judge:index'
+LOGOUT_URL = 'judge:logout'
 
 MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
     messages.ERROR: 'alert-danger',
 }
-
-
-# User authentication
-
-LOGIN_URL = 'judge:login'
-LOGIN_REDIRECT_URL = 'judge:index'
-
-LOGOUT_URL = 'judge:logout'

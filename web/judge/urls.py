@@ -2,7 +2,9 @@ from django.conf.urls import url
 
 from . import views
 
+
 app_name = 'judge'
+
 urlpatterns = [
     url(r'^$',
         views.index,

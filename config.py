@@ -3,11 +3,39 @@ import sys
 import django
 
 
-# Debug mode
+# Debug mode (specifically, when this is enabled, a local SQLite database will
+# be used instead; you may need to perform a migration after enabling this)
 DEBUG = False
 
 
-# Directories
+# Judge settings
+JUDGE_SUBMISSION_MAX_FILE_SIZE = 10240   # in KBs
+JUDGE_SUBMISSION_TIMEOUT = 5             # in seconds (for each submitted file)
+
+JUDGE_COMPILATION_TIMEOUT = 10           # in seconds (for all files to be compiled together)
+
+JUDGE_EXECUTION_MAX_OUTPUT_SIZE = 10240  # in KBs
+JUDGE_EXECUTION_TIMEOUT = 10             # in seconds
+
+
+# Web settings
+WEB_SECRET_KEY = ''
+WEB_ALLOWED_HOSTS = []
+
+
+# Database settings
+DB_NAME = ''
+DB_USER = ''
+DB_PASSWORD = ''
+
+
+# Bitbucket settings
+BITBUCKET_EMAIL = ''
+BITBUCKET_ACCOUNT = ''
+BITBUCKET_PASSWORD = ''
+
+
+# Directories (don't change these unless you know what you're doing!)
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 VIRTUALENV_DIR = os.path.join(ROOT_DIR, 'virtualenv')
@@ -25,40 +53,7 @@ WEB_DIR = os.path.join(ROOT_DIR, 'web')
 WEB_HTDOCS_DIR = os.path.join(WEB_DIR, 'htdocs')
 
 
-# Judge related settings
-JUDGE_SUBMISSION_MAX_FILE_SIZE = 10240   # in KBs
-JUDGE_SUBMISSION_TIMEOUT = 5             # for each submitted file; in seconds
-
-JUDGE_COMPILATION_TIMEOUT = 10           # for all submitted files together; in seconds
-
-JUDGE_EXECUTION_MAX_OUTPUT_SIZE = 10240  # in KBs
-JUDGE_EXECUTION_TIMEOUT = 10             # in seconds
-
-
-# Web related settings
-WEB_SECRET_KEY = ''
-
-WEB_ALLOWED_HOSTS = []
-
-WEB_INDEX_SAMPLE_PROBLEM_ID = 1
-
-
-# DB related settings
-DB_NAME = ''
-DB_USER = ''
-DB_PASSWORD = ''
-
-
-# Account settings
-EMAIL = ''
-EMAIL_PASSWORD = ''
-
-BITBUCKET_EMAIL = ''
-BITBUCKET_ACCOUNT = ''
-BITBUCKET_PASSWORD = ''
-
-
-# Utility functions
+# Utility functions (don't change these unless you know what you're doing!)
 def set_up_django():
     sys.path.insert(0, WEB_DIR)
     os.environ['DJANGO_SETTINGS_MODULE'] = 'esoe_oop_judge.settings'

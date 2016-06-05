@@ -5,12 +5,11 @@ import os
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import config
-
 config.set_up_django()
+
 from django.contrib.auth.models import User
 from judge.models import Profile
 
-# TODO: Add comments on filename's format
 
 def main():
     if len(sys.argv) != 2:
@@ -25,13 +24,14 @@ def main():
             # wipe out the trailing '\n'
             name = name[:-1]
 
-            # create user
+            # create user, with its password being the same as its student ID,
+            # and its email being its NTU mail
             user = User.objects.create_user(username=student_id,
                                             email=(student_id + '@ntu.edu.tw'),
                                             password=student_id)
             user.save()
 
-            # create profile
+            # create its corresponding profile
             profile = Profile(user=user, name=name)
             profile.save()
 

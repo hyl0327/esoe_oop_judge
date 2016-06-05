@@ -3,6 +3,7 @@ from django.core.validators import validate_slug
 
 from django.contrib.auth.models import User
 
+
 class Problem(models.Model):
     title = models.CharField(max_length=32)
     description = models.TextField()
@@ -27,11 +28,11 @@ class RequiredFile(models.Model):
 
     filename = models.CharField(max_length=32)
     via = models.CharField(max_length=1,
-                           choices=(('S', 'Submitted'),
-                                    ('P', 'Provided')))
+                           choices=[('S', 'Submitted'),
+                                    ('P', 'Provided')])
 
     def __str__(self):
-        return '[#{}] [Problem={{ {} }}] {} ({})'.format(
+        return '[#{}][Problem={{{}}}] {} ({})'.format(
             self.pk,
             str(self.problem),
             self.filename,
@@ -46,7 +47,6 @@ class Profile(models.Model):
 
     name = models.CharField(max_length=32)
 
-    # Bitbucket settings
     bitbucket_account = models.CharField(max_length=32,
                                          blank=True,
                                          validators=[validate_slug])
@@ -59,7 +59,7 @@ class Profile(models.Model):
                                              blank=True)
 
     def __str__(self):
-        return '[#{}] [User={{ {} }}] {}'.format(
+        return '[#{}][User={{{}}}] {}'.format(
             self.pk,
             self.user,
             self.name
@@ -73,14 +73,14 @@ class Submission(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     status = models.CharField(max_length=2,
-                              choices=(('SU', 'Submitting'),
+                              choices=[('SU', 'Submitting'),
                                        ('SE', 'Submission Error'),
                                        ('CO', 'Compiling'),
                                        ('CE', 'Compilation Error'),
                                        ('JU', 'Judging'),
                                        ('AC', 'Accepted'),
                                        ('WA', 'Wrong Answer'),
-                                       ('RE', 'Runtime Error')),
+                                       ('RE', 'Runtime Error')],
                               default='SU')
     submission_datetime = models.DateTimeField()
 
@@ -88,7 +88,7 @@ class Submission(models.Model):
     detailed_messages_stderr = models.TextField(blank=True)
 
     def __str__(self):
-        return '[#{}] [Problem={{ {} }}, Profile={{ {} }}]'.format(
+        return '[#{}][Problem={{{}}}][Profile={{{}}}]'.format(
             self.pk,
             str(self.problem),
             str(self.profile)

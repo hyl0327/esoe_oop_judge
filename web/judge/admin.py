@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import Problem, RequiredFile, Profile, Submission
 
+
 class RequiredFileInline(admin.TabularInline):
     model = RequiredFile
 

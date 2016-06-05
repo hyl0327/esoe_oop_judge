@@ -9,9 +9,10 @@ import resource
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 import config
-
 config.set_up_django()
+
 from judge.models import Submission
+
 
 submission = None
 problem = None
@@ -138,7 +139,7 @@ def compile():
         sys.exit(1)
 
 def set_rlimit_fsize():
-    # set the maximum output size limit (in bytes)
+    # set the maximum output size limit
     resource.setrlimit(resource.RLIMIT_FSIZE,
                        (config.JUDGE_EXECUTION_MAX_OUTPUT_SIZE * 1024,
                         config.JUDGE_EXECUTION_MAX_OUTPUT_SIZE * 1024))
@@ -146,7 +147,6 @@ def execute():
     global submission, problem, profile
 
     # execute
-    # TODO: timeout
     cmd = (
         'java'
         ' -Djava.security.manager'
@@ -161,10 +161,11 @@ def execute():
         # instead, it will continue running, but with a restriction imposed
         # by the operating system on its following output.
         #
-        # Although the operating system will restrict the program's
-        # following output, this is still not desired since, in this way,
-        # the program won't return a special return code and hence we can't
-        # catch it and show an error message to the user.
+        # Although the operating system will restrict the program's following
+        # output, this is still not desirable since, in this way, the program
+        # won't return a special return code and hence we can't catch it and
+        # show an error message to the user. Instead, the user will most likely
+        # see a WA.
         problem_id_dir = os.path.join(config.JUDGE_PROBLEMS_DIR, str(problem.pk))
         with open(os.path.join(problem_id_dir, 'input.txt')) as fin, open('output.txt', 'w') as fout:
             subprocess.run(shlex.split(cmd),
@@ -212,7 +213,8 @@ def execute():
         sys.exit(1)
     submission.status = 'AC'
     submission.save()
-    profile.solved_problems.add(problem)
+    if not profile.solved_problems.filter(pk=problem.pk).exists():
+        profile.solved_problems.add(problem)
 
 def main():
     global submission, problem, profile

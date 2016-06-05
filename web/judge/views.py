@@ -21,9 +21,11 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import PasswordChangeForm
 from .forms import ProfileUpdateBitbucketForm
 
+
 @login_required
 def index(request):
-    sample_problem = Problem.objects.get(pk=config.WEB_INDEX_SAMPLE_PROBLEM_ID)
+    # you may change this to use a different problem as sample problem
+    sample_problem = Problem.objects.get(pk=1)
 
     return render(request,
                   'judge/index.html',
