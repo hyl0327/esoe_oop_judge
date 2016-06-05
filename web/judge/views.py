@@ -193,12 +193,14 @@ def profile(request):
 
 @login_required
 def submission_detail(request, pk):
-    profile = request.user.profile
+    user = request.user
+    profile = user.profile
 
     submission = get_object_or_404(Submission, pk=pk)
 
-    # see if this submission belongs to this profile
-    if submission.profile != profile:
+    # if the profile isn't the owner of this submission, and it isn't a staff
+    # either, then it shouldn't see this submission
+    if submission.profile != profile and not user.is_staff:
         messages.error(request,
                        'Permission denied.')
         return HttpResponseRedirect(reverse('judge:index'))
