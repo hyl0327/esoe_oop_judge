@@ -210,10 +210,10 @@ def submission_detail(request, pk):
     if submission.status != 'SU' and submission.status != 'SE':
         submitted_filenames = [f.filename for f in submission.problem.requiredfile_set.filter(via='S')]
         for filename in submitted_filenames:
-            with open(os.path.join(config.JUDGE_SUBMISSIONS_DIR, str(submission.pk), filename)) as f:
+            with open(os.path.join(config.JUDGE_SUBMISSIONS_DIR, str(submission.pk), filename), 'rb') as f:
                 submitted_file_info_list.append({
                     'filename': filename,
-                    'content': f.read()
+                    'content': f.read().decode('utf-8', 'replace')
                 })
 
     return render(request,
