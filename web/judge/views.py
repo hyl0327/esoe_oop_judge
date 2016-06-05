@@ -52,10 +52,14 @@ def logout(request):
 
 @login_required
 def problem_list(request):
-    profile = request.user.profile
+    user = request.user
+    profile = user.profile
 
     problem_info_list = []
     for problem in Problem.objects.all():
+        if problem.staff_viewable_only and not user.is_staff:
+            continue
+
         profile_solved = profile.solved_problems.filter(pk=problem.pk).exists()
         problem_info_list.append({
             'problem': problem,
@@ -68,9 +72,15 @@ def problem_list(request):
 
 @login_required
 def problem_detail(request, pk):
-    profile = request.user.profile
+    user = request.user
+    profile = user.profile
 
     problem = get_object_or_404(Problem, pk=pk)
+    if problem.staff_viewable_only and not user.is_staff:
+        messages.error(request,
+                       'Permission denied.')
+        return HttpResponseRedirect(reverse('judge:index'))
+
     profile_submission_list = problem.submission_set.filter(profile=profile)
     profile_solved = profile.solved_problems.filter(pk=problem.pk).exists()
 

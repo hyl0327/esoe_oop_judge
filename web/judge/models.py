@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 
 
 class Problem(models.Model):
+    # this is convenient when you are now constructing a problem and don't want
+    # users to see it for the time being
+    staff_viewable_only = models.BooleanField(default=False)
+
     title = models.CharField(max_length=32)
     description = models.TextField()
     input_format = models.TextField()
