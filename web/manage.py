@@ -2,6 +2,7 @@
 import os
 import sys
 
+
 if __name__ == '__main__':
     os.environ['DJANGO_SETTINGS_MODULE'] = 'esoe_oop_judge.settings'
 

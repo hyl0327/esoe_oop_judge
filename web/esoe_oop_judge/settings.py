@@ -16,21 +16,15 @@ import config
 from django.contrib.messages import constants as messages
 
 
-# Django's own debug mode (here, we let it be the same as config.DEBUG)
-DEBUG = config.DEBUG
-
-
-# Web base directory
-BASE_DIR = config.WEB_DIR
-
-
 # Deployment
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 SECRET_KEY = config.WEB_SECRET_KEY
+
+DEBUG = config.WEB_DEBUG
 ALLOWED_HOSTS = config.WEB_ALLOWED_HOSTS
 
 
-# Application settings
+# Application
 INSTALLED_APPS = [
     'judge.apps.JudgeConfig',
     'widget_tweaks',
@@ -74,9 +68,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'esoe_oop_judge.wsgi.application'
 
 
-# Database settings
+# Database
 # See https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-if config.DEBUG:
+if config.WEB_DB_USE_LOCAL:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -87,15 +81,15 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': config.DB_NAME,
-            'USER': config.DB_USER,
-            'PASSWORD': config.DB_PASSWORD,
+            'NAME': config.WEB_DB_NAME,
+            'USER': config.WEB_DB_USER,
+            'PASSWORD': config.WEB_DB_PASSWORD,
         }
     }
 
 
 # Password validation
-# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+# See https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -113,11 +107,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.9/topics/i18n/
+# See https://docs.djangoproject.com/en/1.9/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Asia/Taipei'
-
 DATETIME_FORMAT='Y-m-d H:i:s'
 
 USE_I18N = False
@@ -126,14 +118,15 @@ USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
+# See https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(config.WEB_HTDOCS_DIR, 'static')
-
 STATICFILES_DIRS = [config.JUDGE_STATIC_DIR]
 
 
 # Miscellaneous settings
+BASE_DIR = config.WEB_DIR
+
 LOGIN_URL = 'judge:login'
 LOGIN_REDIRECT_URL = 'judge:index'
 LOGOUT_URL = 'judge:logout'

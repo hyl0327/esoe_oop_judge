@@ -201,12 +201,12 @@ def execute():
              shlex.quote(os.path.join(problem_id_dir, 'answer.txt')))
     try:
         # diff returns an error code when there're any differences
-        p = subprocess.run(shlex.split(cmd),
-                           stdin=subprocess.PIPE,
-                           stdout=subprocess.PIPE,
-                           stderr=subprocess.PIPE,
-                           universal_newlines=True,
-                           check=True)
+        subprocess.run(shlex.split(cmd),
+                       stdin=subprocess.PIPE,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.PIPE,
+                       universal_newlines=True,
+                       check=True)
     except subprocess.CalledProcessError as e:
         submission.status = 'WA'
         submission.save()
