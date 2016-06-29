@@ -71,6 +71,8 @@ JUDGE_SUBMISSIONS_DIR = os.path.join(JUDGE_DIR, 'submissions')
 
 UTILITIES_DIR = os.path.join(ROOT_DIR, 'utilities')
 
+DOCS_DIR = os.path.join(ROOT_DIR, 'docs')
+
 
 # Utility functions (don't change these unless you know what you're doing!)
 def set_up_django():
