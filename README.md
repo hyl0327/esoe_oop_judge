@@ -86,7 +86,8 @@ You may visit `/admin/` for the admin page.
 2. Create a new directory in `<JUDGE_PROBLEMS_DIR>` named `PK` (for example,
    if the problem you just added has a `PK` of `1`, then the directory should be
    named `1`), and then put the `Main.java`, `input.txt`, and `answer.txt`
-   corresponding to this problem into that directory.
+   corresponding to this problem into that directory (see
+   `<JUDGE_PROBLEMS_DIR>/sample/` for sample).
 3. If there are any required files marked provided, then you should also create
    a new directory in `<JUDGE_STATIC_PROBLEMS_DIR>` named `PK`, and then put
    them into that directory. After that, you should run `python
