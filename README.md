@@ -71,7 +71,7 @@ You may visit `/` (the index page) for a brief guide on using this system.
 
 In case you find it not clear enough, you may further refer to
 `<DOCS_DIR>/usage_windows.pdf` or `<DOCS_DIR>/usage_mac.pdf` for a step-by-step
-guide (credits to Yun-Tao Chen (陳雲濤) and Shan-Wen Chen (陳善文)).
+guide (credits to Yun-Tao Chen (陳雲濤) and Sher-Win Chen (陳善文)).
 
 
 ## Administration
