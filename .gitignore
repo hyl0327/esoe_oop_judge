@@ -71,7 +71,6 @@ target/
 virtualenv/
 
 # Web related files
-web/mod_wsgi-express-*/
 web/htdocs/*
 !web/htdocs/.keep
 
@@ -79,6 +78,6 @@ web/htdocs/*
 judge/submissions/*
 !judge/submissions/.keep
 judge/problems/*
-!judge/problems/.keep
+!judge/problems/sample/
 judge/static/problems/*
 !judge/static/problems/.keep
