@@ -13,10 +13,7 @@ from judge.models import Profile
 
 def main():
     for line in sys.stdin:
-        student_id, name = line.split(',')
-
-        # wipe out the trailing '\n'
-        name = name[:-1]
+        student_id, name = [word.strip(' \t\n\r') for word in line.split(',')]
 
         # create user, with its password being the same as its student ID,
         # and its email being its NTU mail
