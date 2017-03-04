@@ -11,12 +11,12 @@ and Bitbucket as its judging platform (that is, users should submit code to
 Bitbucket), so that users are expected to learn from using this system how to
 code in Java as well as how to use Git.
 
-As a judge system for an OOP course, it allows problems that require multiple
-files (either submitted or provided) to be compiled together, which is different
-from traditional judge systems that usually allow only problems that require a
-single file to be compiled. In this way, users are able to further understand
-the concept of OOP by being forced to separate their code logic into multiple
-files, some of which might even be provided from the problem itself.
+As a judge system for an OOP course, it allows problems to have multiple files
+(either submitted or provided) to be compiled together, which is different from
+traditional judge systems that only allow problems to have a single file to be
+compiled. In this way, users are able to further understand the concept of OOP
+by being forced to separate their code logic into multiple files, some of which
+might even be provided from the problem itself.
 
 
 ## Prerequisites
