@@ -214,13 +214,11 @@ def submission_detail(request, pk):
             # then decode it with UTF-8, such that reading submitted files in
             # other encodings (for example, those uploaded from Windows) won't
             # cause a problem
-            filepath = os.path.join(config.JUDGE_SUBMISSIONS_DIR, str(submission.pk), filename)
-            if os.path.isfile(filepath):
-                with open(filepath, 'rb') as f:
-                    submitted_file_info_list.append({
-                        'filename': filename,
-                        'content': f.read().decode('utf-8', 'replace')
-                    })
+            with open(os.path.join(config.JUDGE_SUBMISSIONS_DIR, str(submission.pk), filename), 'rb') as f:
+                submitted_file_info_list.append({
+                    'filename': filename,
+                    'content': f.read().decode('utf-8', 'replace')
+                })
 
     return render(request,
                   'judge/submission_detail.html',
