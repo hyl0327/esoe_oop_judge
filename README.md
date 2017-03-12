@@ -98,7 +98,7 @@ Utilities are located in `<UTILITIES_DIR>`. Before you use them, make sure you
 have activated virtualenv.
 
 - `add_users.py`: Add new users. It takes input from `stdin`, where each line
-  should be in the form of `student_id,name`.
+  should be in the form of `student_id, name`.
 - `stats.py`: User statistics. See `python <UTILITIES_DIR>/stats.py -h` for more
   details.
 
