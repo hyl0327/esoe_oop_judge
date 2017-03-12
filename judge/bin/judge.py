@@ -149,10 +149,12 @@ def execute():
     # execute
     cmd = (
         'java'
+        ' -Xmx{}m'
         ' -Djava.security.manager'
         ' -Djava.security.policy=={}'
         ' Main'
-    ).format(shlex.quote(os.path.join(config.JUDGE_POLICIES_DIR, 'default.policy')))
+    ).format(config.JUDGE_EXECUTION_MAX_HEAP_SIZE,
+             shlex.quote(os.path.join(config.JUDGE_POLICIES_DIR, 'default.policy')))
     try:
         # FIXME:
         #

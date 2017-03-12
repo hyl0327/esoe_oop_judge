@@ -39,6 +39,7 @@ JUDGE_COMPILATION_TIMEOUT = 10           # in seconds (for all files to be compi
 
 JUDGE_EXECUTION_MAX_OUTPUT_SIZE = 10240  # in KBs
 JUDGE_EXECUTION_TIMEOUT = 10             # in seconds
+JUDGE_EXECUTION_MAX_HEAP_SIZE = 64       # in MBs
 
 
 # Bitbucket settings
