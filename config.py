@@ -12,13 +12,15 @@ import django
 #
 # As a note,
 #   WEB_SECRET_KEY should always be set;
-#   WEB_ALLOWED_HOSTS should be set only when WEB_DEBUG is False;
+#   WEB_ALLOWED_HOSTS and WEB_ADMINS should be set only when WEB_DEBUG is False;
 #   WEB_DB_NAME/USER/PASSWORD should be set only when WEB_DB_USE_LOCAL is False;
 #   WEB_DEBUG and WEB_DB_USE_LOCAL should be set to False in production.
 WEB_SECRET_KEY = ''
 
 WEB_DEBUG = False
 WEB_ALLOWED_HOSTS = []
+
+WEB_ADMINS = []
 
 WEB_DB_USE_LOCAL = False
 WEB_DB_NAME = ''
