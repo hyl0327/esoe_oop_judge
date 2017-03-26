@@ -73,6 +73,8 @@ virtualenv/
 # Web related files
 web/htdocs/*
 !web/htdocs/.keep
+web/logs/*
+!web/logs/.keep
 
 # Judge related files
 judge/submissions/*
