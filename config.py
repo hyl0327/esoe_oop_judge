@@ -63,6 +63,7 @@ WEB_DIR = os.path.join(ROOT_DIR, 'web')
 WEB_ESOEOOPJUDGE_DIR = os.path.join(WEB_DIR, 'esoe_oop_judge')
 WEB_JUDGE_DIR = os.path.join(WEB_DIR, 'judge')
 WEB_HTDOCS_DIR = os.path.join(WEB_DIR, 'htdocs')
+WEB_LOGS_DIR = os.path.join(WEB_DIR, 'logs')
 
 JUDGE_DIR = os.path.join(ROOT_DIR, 'judge')
 JUDGE_BIN_DIR = os.path.join(JUDGE_DIR, 'bin')
