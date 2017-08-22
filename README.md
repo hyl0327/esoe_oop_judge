@@ -1,22 +1,20 @@
 esoe_oop_judge
 ==============
 
-The judge system used by the OOP course at NTU ESOE.
+ESOE OOP Judge is the judge system used by the Object-Oriented Programming
+course at NTU ESOE. Written in Django and Bootstrap, it aims to be a judge
+system that is safe, easy-to-use, and easy-to-administrate.
 
-Written in Python/Django/Bootstrap, it offers a judge system that is safe,
-easy-to-use, and easy-to-administrate.
+The judge system reads Java code. Students are asked to upload their code to
+Bitbucket, where the judge system will then grab the code and check their
+correctness. This way, students are expected to learn the idea of version
+control via Git.
 
-It uses Java as its judging language (that is, users should submit Java code)
-and Bitbucket as its judging platform (that is, users should submit code to
-Bitbucket), so that users are expected to learn from using this system how to
-code in Java as well as how to use Git.
-
-As a judge system for an OOP course, it allows problems to have multiple files
-(either submitted or provided) to be compiled together, which is different from
-traditional judge systems that only allow problems to have a single file to be
-compiled. In this way, users are able to further understand the concept of OOP
-by being forced to separate their code logic into multiple files, some of which
-might even be provided from the problem itself.
+What makes ESOE OOP Judge most valuable is that it allows a problem to be
+separated into multiple compilation units (.java files), some of which might
+be provided by the problem itself, and the others should be implemented by
+the students. This makes it easy for students to understand the idea of OOP
+by obligating them to separate their code logics into reasonable smaller parts.
 
 
 ## Prerequisites
